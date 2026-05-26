@@ -47,7 +47,7 @@
     "@typebot.io/variables": "workspace:*",
     "chrono-node": "2.7.6",
     "date-fns": "^2.30.0",
-    "date-fns-tz": "^2.0.0",
+    "date-fns-tz": "^3.2.0",
     "google-spreadsheet": "^4.1.4",
     "ky": "^1.2.4",
     "libphonenumber-js": "1.10.37",
