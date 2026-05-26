@@ -1,0 +1,122 @@
+import {
+  authenticatedProcedure,
+  publicProcedure as builderPublicProcedure,
+} from "@typebot.io/config/orpc/builder/middlewares";
+import { publicProcedure } from "@typebot.io/config/orpc/viewer/middlewares";
+import { z } from "zod";
+import {
+  generateUploadUrlV1InputSchema,
+  handleGenerateUploadUrlV1,
+} from "./deprecated/handleGenerateUploadUrlV1";
+import {
+  generateUploadUrlV2InputSchema,
+  handleGenerateUploadUrlV2,
+} from "./deprecated/handleGenerateUploadUrlV2";
+import {
+  generateUploadUrlInputSchema,
+  handleGenerateUploadUrl,
+} from "./handleGenerateUploadUrl";
+import {
+  getPrivateFileInputSchema,
+  handleGetPrivateFile,
+} from "./handleGetPrivateFile";
+
+export const fileUploadBuilderRouter = {
+  getPrivateFile: authenticatedProcedure
+    .route({
+      method: "GET",
+      path: "/s3/private/{+rest}",
+      successStatus: 307,
+      outputStructure: "detailed",
+    })
+    .output(
+      z.object({
+        headers: z.object({
+          location: z.string(),
+        }),
+      }),
+    )
+    .input(getPrivateFileInputSchema)
+    .handler(handleGetPrivateFile),
+  generateUploadUrlProcedure: builderPublicProcedure
+    .route({
+      method: "POST",
+      path: "/v3/generate-upload-url",
+      summary: "Generate upload URL",
+      description: "Used to upload anything from the client to S3 bucket",
+      tags: ["File upload"],
+    })
+    .input(generateUploadUrlInputSchema)
+    .output(
+      z.object({
+        presignedUrl: z.string(),
+        formData: z.record(z.string(), z.string()),
+        fileType: z.string().optional(),
+        maxFileSize: z.number().optional(),
+        fileUrl: z.string(),
+      }),
+    )
+    .handler(handleGenerateUploadUrl),
+};
+
+export const fileUploadViewerRouter = {
+  generateUploadUrlProcedure: publicProcedure
+    .route({
+      method: "POST",
+      path: "/v3/generate-upload-url",
+      summary: "Generate upload URL",
+      description: "Used to upload anything from the client to S3 bucket",
+      tags: ["File upload"],
+    })
+    .input(generateUploadUrlInputSchema)
+    .output(
+      z.object({
+        presignedUrl: z.string(),
+        formData: z.record(z.string(), z.string()),
+        fileType: z.string().optional(),
+        maxFileSize: z.number().optional(),
+        fileUrl: z.string(),
+      }),
+    )
+    .handler(handleGenerateUploadUrl),
+  generateUploadUrlV1Procedure: publicProcedure
+    .route({
+      method: "POST",
+      path: "/v1/generate-upload-url",
+      summary: "Generate upload URL",
+      description: "Used to upload anything from the client to S3 bucket",
+      deprecated: true,
+      tags: ["File upload"],
+    })
+    .input(generateUploadUrlV1InputSchema)
+    .output(
+      z.object({
+        presignedUrl: z.string(),
+        formData: z.record(z.string(), z.string()),
+        fileType: z.string().optional(),
+        maxFileSize: z.number().optional(),
+        fileUrl: z.string(),
+      }),
+    )
+    .handler(handleGenerateUploadUrlV1),
+  generateUploadUrlV2Procedure: publicProcedure
+    .route({
+      method: "POST",
+      path: "/v2/generate-upload-url",
+      summary: "Generate upload URL",
+      description: "Used to upload anything from the client to S3 bucket",
+      deprecated: true,
+      tags: ["File upload"],
+    })
+    .input(generateUploadUrlV2InputSchema)
+    .output(
+      z.object({
+        presignedUrl: z.string(),
+        formData: z.record(z.string(), z.string()),
+        fileType: z.string().optional(),
+        maxFileSize: z.number().optional(),
+        fileUrl: z.string(),
+      }),
+    )
+    .handler(handleGenerateUploadUrlV2),
+};

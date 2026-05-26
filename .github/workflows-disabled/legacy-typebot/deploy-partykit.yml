@@ -1,0 +1,38 @@
+name: Deploy Partykit server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/partykit/**"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    env:
+      DATABASE_URL: "${{ secrets.DATABASE_URL }}"
+      ENCRYPTION_SECRET: "${{ secrets.ENCRYPTION_SECRET }}"
+      NEXTAUTH_URL: "http://localhost:3000"
+      NEXT_PUBLIC_VIEWER_URL: "http://localhost:3001"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: "package.json"
+      - run: bun install
+      - run: bunx nx deploy @typebot.io/partykit -- --domain ${PARTYKIT_DOMAIN}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN  }}
+          PARTYKIT_DOMAIN: ${{ secrets.PARTYKIT_DOMAIN }}
+          PARTYKIT_LOGIN: ${{ secrets.PARTYKIT_LOGIN  }}
+          PARTYKIT_TOKEN: ${{ secrets.PARTYKIT_TOKEN }}

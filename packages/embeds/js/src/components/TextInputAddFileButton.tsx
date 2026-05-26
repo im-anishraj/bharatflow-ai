@@ -1,0 +1,94 @@
+import { Menu } from "@ark-ui/solid";
+import { cx } from "@typebot.io/ui/lib/cva";
+import { createUniqueId } from "solid-js";
+import { FileIcon } from "./icons/FileIcon";
+import { PaperClipIcon } from "./icons/PaperClipIcon";
+import { PictureIcon } from "./icons/PictureIcon";
+
+type Props = {
+  onNewFiles: (files: FileList) => void;
+  class?: string;
+};
+export const TextInputAddFileButton = (props: Props) => {
+  const baseId = createUniqueId();
+  const documentUploadId = `${baseId}-document-upload`;
+  const photosUploadId = `${baseId}-photos-upload`;
+
+  return (
+    <>
+      <input
+        type="file"
+        id={documentUploadId}
+        multiple
+        class="hidden"
+        onChange={(e) => {
+          if (!e.currentTarget.files) return;
+          props.onNewFiles(e.currentTarget.files);
+          e.currentTarget.value = "";
+        }}
+      />
+      <input
+        type="file"
+        id={photosUploadId}
+        accept="image/avif, image/png, image/jpeg, image/gif, image/webp, image/bmp, image/tiff, video/*, capture=camera"
+        multiple
+        class="hidden"
+        onChange={(e) => {
+          if (!e.currentTarget.files) return;
+          props.onNewFiles(e.currentTarget.files);
+          e.currentTarget.value = "";
+        }}
+      />
+
+      <label
+        aria-label="Add attachments"
+        for={documentUploadId}
+        class={cx(
+          "filter data-[state=open]:backdrop-brightness-90 hover:backdrop-brightness-95 transition rounded-md p-2 focus:outline-none @xs:hidden",
+          props.class,
+        )}
+      >
+        <PaperClipIcon class="w-5" />
+      </label>
+      <Menu.Root>
+        <Menu.Trigger
+          class={cx(
+            "filter data-[state=open]:backdrop-brightness-90 hover:backdrop-brightness-95 transition rounded-md p-2 focus:outline-none @xs:block hidden",
+            props.class,
+          )}
+          aria-label="Add attachments"
+        >
+          <PaperClipIcon class="w-5" />
+        </Menu.Trigger>
+        <Menu.Positioner>
+          <Menu.Content class="p-3 gap-2 focus:outline-none">
+            <Menu.Item
+              value="document"
+              asChild={(props) => (
+                <label
+                  {...props()}
+                  for={documentUploadId}
+                  class="p-2 filter hover:brightness-95 flex gap-3 items-center"
+                >
+                  <FileIcon class="w-4" /> Document
+                </label>
+              )}
+            />
+            <Menu.Item
+              value="photos"
+              asChild={(props) => (
+                <label
+                  {...props()}
+                  for={photosUploadId}
+                  class="p-2 filter hover:brightness-95 flex gap-3 items-center"
+                >
+                  <PictureIcon class="w-4" /> Photos & videos
+                </label>
+              )}
+            />
+          </Menu.Content>
+        </Menu.Positioner>
+      </Menu.Root>
+    </>
+  );
+};

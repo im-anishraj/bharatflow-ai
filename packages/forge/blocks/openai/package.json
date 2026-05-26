@@ -1,0 +1,44 @@
+{
+  "name": "@typebot.io/openai-block",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./schemas": {
+      "types": "./src/schemas.ts",
+      "import": "./src/schemas.ts",
+      "default": "./src/schemas.ts"
+    },
+    "./shared/*": {
+      "types": "./src/shared/*.ts",
+      "import": "./src/shared/*.ts",
+      "default": "./src/shared/*.ts"
+    },
+    "./handlers": {
+      "types": "./src/handlers/index.ts",
+      "import": "./src/handlers/index.ts",
+      "default": "./src/handlers/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^2.0.106",
+    "@sentry/nextjs": "^10.43.0",
+    "@typebot.io/ai": "workspace:*",
+    "@ai-sdk/ui-utils": "^1.2.11",
+    "openai": "^6.9.1",
+    "@typebot.io/forge": "workspace:*",
+    "@typebot.io/lib": "workspace:*",
+    "@typebot.io/variables": "workspace:*",
+    "@typebot.io/runtime-session-store": "workspace:*",
+    "ky": "^1.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14"
+  }
+}

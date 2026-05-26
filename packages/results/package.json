@@ -1,0 +1,35 @@
+{
+  "name": "@typebot.io/results",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "bun test"
+  },
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
+    "effect": "4.0.0-beta.38",
+    "papaparse": "^5.4.1",
+    "@typebot.io/blocks-core": "workspace:*",
+    "@typebot.io/emails": "workspace:*",
+    "@typebot.io/blocks-inputs": "workspace:*",
+    "@typebot.io/config": "workspace:*",
+    "@typebot.io/env": "workspace:*",
+    "@typebot.io/groups": "workspace:*",
+    "@typebot.io/lib": "workspace:*",
+    "@typebot.io/prisma": "workspace:*",
+    "@typebot.io/telemetry": "workspace:*",
+    "@typebot.io/typebot": "workspace:*",
+    "@typebot.io/variables": "workspace:*",
+    "zod": "^4.3.5"
+  }
+}

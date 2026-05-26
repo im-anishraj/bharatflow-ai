@@ -1,0 +1,43 @@
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import type { TypebotInDashboard } from "../dashboard/types";
+
+const typebotDndContext = createContext<{
+  draggedTypebot?: TypebotInDashboard;
+  setDraggedTypebot: Dispatch<SetStateAction<TypebotInDashboard | undefined>>;
+  mouseOverFolderId?: string | null;
+  setMouseOverFolderId: Dispatch<SetStateAction<string | undefined | null>>;
+  mouseOverSpaceId?: string | null;
+  setMouseOverSpaceId: Dispatch<SetStateAction<string | undefined | null>>;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+}>({});
+
+export const TypebotDndProvider = ({ children }: { children: ReactNode }) => {
+  const [draggedTypebot, setDraggedTypebot] = useState<TypebotInDashboard>();
+  const [mouseOverFolderId, setMouseOverFolderId] = useState<string | null>();
+  const [mouseOverSpaceId, setMouseOverSpaceId] = useState<string | null>();
+
+  useEffect(() => {
+    draggedTypebot
+      ? document.body.classList.add("grabbing")
+      : document.body.classList.remove("grabbing");
+  }, [draggedTypebot]);
+
+  return (
+    <typebotDndContext.Provider
+      value={{
+        draggedTypebot,
+        setDraggedTypebot,
+        mouseOverFolderId,
+        setMouseOverFolderId,
+        mouseOverSpaceId,
+        setMouseOverSpaceId,
+      }}
+    >
+      {children}
+    </typebotDndContext.Provider>
+  );
+};
+
+export const useTypebotDnd = () => useContext(typebotDndContext);

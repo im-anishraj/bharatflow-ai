@@ -1,0 +1,133 @@
+import { ORPCError } from "@orpc/server";
+import { isDefined } from "@typebot.io/lib/utils";
+import prisma from "@typebot.io/prisma";
+import { resultWithAnswersSchema } from "@typebot.io/results/schemas/results";
+import {
+  defaultTimeFilter,
+  parseFromDateFromTimeFilter,
+  parseToDateFromTimeFilter,
+  timeFilterValues,
+} from "@typebot.io/results/timeFilter";
+import { isReadTypebotForbidden } from "@typebot.io/typebot/helpers/isReadTypebotForbidden";
+import type { User } from "@typebot.io/user/schemas";
+import { z } from "zod";
+
+const MAX_LIMIT = 500;
+
+export const getResultsInputSchema = z.object({
+  typebotId: z
+    .string()
+    .describe(
+      "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+    ),
+  limit: z.coerce.number().min(1).max(MAX_LIMIT).default(50),
+  cursor: z.coerce.number().optional(),
+  timeFilter: z.enum(timeFilterValues).default(defaultTimeFilter),
+  timeZone: z.string().optional(),
+});
+
+export const handleGetResults = async ({
+  input,
+  context: { user },
+}: {
+  input: z.infer<typeof getResultsInputSchema>;
+  context: { user: Pick<User, "id" | "email"> };
+}) => {
+  const limit = Number(input.limit);
+  if (limit < 1 || limit > MAX_LIMIT)
+    throw new ORPCError("BAD_REQUEST", {
+      message: `limit must be between 1 and ${MAX_LIMIT}`,
+    });
+  const { cursor } = input;
+  const typebot = await prisma.typebot.findUnique({
+    where: {
+      id: input.typebotId,
+    },
+    select: {
+      id: true,
+      groups: true,
+      collaborators: {
+        select: {
+          userId: true,
+          type: true,
+        },
+      },
+      workspace: {
+        select: {
+          isSuspended: true,
+          isPastDue: true,
+          members: {
+            select: {
+              userId: true,
+            },
+          },
+        },
+      },
+    },
+  });
+  if (!typebot || (await isReadTypebotForbidden(typebot, user)))
+    throw new ORPCError("NOT_FOUND", { message: "Typebot not found" });
+
+  const fromDate = parseFromDateFromTimeFilter(
+    input.timeFilter,
+    input.timeZone,
+  );
+  const toDate = parseToDateFromTimeFilter(input.timeFilter, input.timeZone);
+
+  const queriedResults = await prisma.result.findMany({
+    take: limit + 1,
+    skip: cursor,
+    where: {
+      typebotId: typebot.id,
+      hasStarted: true,
+      isArchived: false,
+      createdAt: fromDate
+        ? {
+            gte: fromDate,
+            lte: toDate ?? undefined,
+          }
+        : undefined,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      answers: {
+        select: {
+          blockId: true,
+          content: true,
+          createdAt: true,
+        },
+      },
+      answersV2: {
+        select: {
+          blockId: true,
+          content: true,
+          createdAt: true,
+        },
+      },
+    },
+  });
+
+  const hasMoreResults = queriedResults.length > limit;
+  const paginatedResults = hasMoreResults
+    ? queriedResults.slice(0, limit)
+    : queriedResults;
+
+  let nextCursor: number | undefined;
+  if (hasMoreResults && isDefined(cursor)) {
+    nextCursor = cursor + limit;
+  }
+
+  return {
+    results: z.array(resultWithAnswersSchema).parse(
+      paginatedResults.map((r) => ({
+        ...r,
+        answers: r.answersV2
+          .concat(r.answers)
+          .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime()),
+      })),
+    ),
+    nextCursor,
+  };
+};

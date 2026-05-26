@@ -1,0 +1,17 @@
+{
+  "name": "@typebot.io/events",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "zod": "^4.3.5"
+  }
+}

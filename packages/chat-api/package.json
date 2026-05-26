@@ -1,0 +1,27 @@
+{
+  "name": "@typebot.io/chat-api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@typebot.io/typebot": "workspace:*",
+    "@typebot.io/blocks-bubbles": "workspace:*",
+    "@typebot.io/blocks-inputs": "workspace:*",
+    "@typebot.io/blocks-logic": "workspace:*",
+    "@typebot.io/blocks-integrations": "workspace:*",
+    "@typebot.io/variables": "workspace:*",
+    "@typebot.io/logs": "workspace:*",
+    "@typebot.io/settings": "workspace:*",
+    "@typebot.io/theme": "workspace:*",
+    "zod": "^4.3.5"
+  },
+  "scripts": {}
+}

@@ -1,0 +1,48 @@
+import { useQuery } from "@tanstack/react-query";
+import { defaultOpenAIOptions } from "@typebot.io/blocks-integrations/openai/constants";
+import { BasicSelect } from "@/components/inputs/BasicSelect";
+import { useWorkspace } from "@/features/workspace/WorkspaceProvider";
+import { orpc } from "@/lib/queryClient";
+
+type Props = {
+  baseUrl?: string;
+  apiVersion?: string;
+  credentialsId: string;
+  defaultValue?: string;
+  type: "gpt" | "tts";
+  onChange: (model: string | undefined) => void;
+};
+
+export const ModelsDropdown = ({
+  baseUrl,
+  apiVersion,
+  defaultValue,
+  onChange,
+  credentialsId,
+  type,
+}: Props) => {
+  const { workspace } = useWorkspace();
+
+  const { data } = useQuery(
+    orpc.openAI.listModels.queryOptions({
+      input: {
+        credentialsId,
+        baseUrl: baseUrl ?? defaultOpenAIOptions.baseUrl,
+        workspaceId: workspace?.id as string,
+        apiVersion,
+        type,
+      },
+      enabled: !!workspace,
+    }),
+  );
+
+  return (
+    <BasicSelect
+      className="w-full"
+      items={data?.models ?? []}
+      value={defaultValue}
+      onChange={onChange}
+      placeholder="Select a model"
+    />
+  );
+};

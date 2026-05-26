@@ -1,0 +1,63 @@
+import { useTranslate } from "@tolgee/react";
+import type {
+  BlockIndices,
+  BlockV6,
+} from "@typebot.io/blocks-core/schemas/schema";
+import type { TurnableIntoParam } from "@typebot.io/forge/types";
+import { ContextMenu } from "@typebot.io/ui/components/ContextMenu";
+import { ArrowRight01Icon } from "@typebot.io/ui/icons/ArrowRight01Icon";
+import { Copy01Icon } from "@typebot.io/ui/icons/Copy01Icon";
+import { RepeatIcon } from "@typebot.io/ui/icons/RepeatIcon";
+import { TrashIcon } from "@typebot.io/ui/icons/TrashIcon";
+import type { ZodObject } from "zod";
+import { useTypebot } from "@/features/editor/providers/TypebotProvider";
+import { ForgedBlockTurnIntoContextMenuPopup } from "@/features/forge/components/ForgedBlockTurnIntoMenu";
+import { useForgedBlock } from "@/features/forge/hooks/useForgedBlock";
+
+type Props = {
+  indices: BlockIndices;
+  block: BlockV6;
+  onTurnIntoClick: (params: TurnableIntoParam, schema: ZodObject<any>) => void;
+};
+
+export const BlockNodeContextMenuPopup = ({
+  indices,
+  block,
+  onTurnIntoClick,
+}: Props) => {
+  const { t } = useTranslate();
+  const { deleteBlock, duplicateBlock } = useTypebot();
+
+  const handleDuplicateClick = () => duplicateBlock(indices);
+
+  const handleDeleteClick = () => deleteBlock(indices);
+
+  const { actionDef } = useForgedBlock({
+    nodeType: block.type,
+    action: "options" in block ? block.options?.action : undefined,
+  });
+
+  return (
+    <ContextMenu.Popup>
+      {actionDef?.turnableInto && actionDef?.turnableInto.length > 0 && (
+        <ContextMenu.SubmenuRoot>
+          <ContextMenu.SubmenuTrigger>
+            <RepeatIcon /> Turn into <ArrowRight01Icon />
+          </ContextMenu.SubmenuTrigger>
+          <ForgedBlockTurnIntoContextMenuPopup
+            turnableInto={actionDef.turnableInto}
+            onTurnIntoClick={onTurnIntoClick}
+          />
+        </ContextMenu.SubmenuRoot>
+      )}
+      <ContextMenu.Item onClick={handleDuplicateClick}>
+        <Copy01Icon />
+        {t("duplicate")}
+      </ContextMenu.Item>
+      <ContextMenu.Item onClick={handleDeleteClick} className="text-red-10">
+        <TrashIcon />
+        {t("delete")}
+      </ContextMenu.Item>
+    </ContextMenu.Popup>
+  );
+};

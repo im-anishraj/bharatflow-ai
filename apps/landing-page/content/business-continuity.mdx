@@ -1,0 +1,37 @@
+---
+title: BharatFlow AI Business Continuity
+description: Prototype continuity posture for BharatFlow AI.
+updatedAt: 2026-05-27
+author: BharatFlow AI
+---
+
+BharatFlow AI is currently a private prototype. This page documents the continuity posture required before any enterprise pilot or external launch.
+
+## Current Posture
+
+- The repository is private.
+- The codebase keeps the existing monorepo architecture and self-hostable foundation.
+- Public Typebot release and deployment automation has been disabled.
+- CI, CodeQL, Dependabot, branch protection, and private repo controls are part of the professional setup.
+
+## Before Enterprise Pilots
+
+The following items must be completed or explicitly accepted as pilot risks:
+
+- legal clearance for commercial use;
+- documented hosting architecture;
+- backup and restore procedure;
+- incident response owner and escalation path;
+- security review for secrets, credentials, and file uploads;
+- DPDP-aware data handling process;
+- subprocessors list;
+- uptime and support commitments; and
+- customer offboarding and data deletion process.
+
+## Private Deployment Direction
+
+The intended enterprise path is private deployment or tightly controlled hosted infrastructure, with Postgres, Redis, object storage, encrypted credentials, and environment-specific secret management.
+
+## Contact
+
+For continuity or enterprise-readiness questions, contact [founders@bharatflow.ai](mailto:founders@bharatflow.ai).

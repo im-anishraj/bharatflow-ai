@@ -1,0 +1,133 @@
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { withSentryConfig } from "@sentry/nextjs";
+import { configureRuntimeEnv } from "next-runtime-env/build/configure.js";
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = dirname(__filename);
+
+const injectViewerUrlIfVercelPreview = (val) => {
+  if (
+    (val && typeof val === "string" && val.length > 0) ||
+    process.env.VERCEL_ENV !== "preview" ||
+    !process.env.VERCEL_BUILDER_PROJECT_NAME ||
+    !process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME
+  )
+    return;
+  process.env.NEXT_PUBLIC_VIEWER_URL = `https://${process.env.VERCEL_BRANCH_URL}`;
+  if (process.env.NEXT_PUBLIC_CHAT_API_URL?.includes("{{pr_id}}"))
+    process.env.NEXT_PUBLIC_CHAT_API_URL =
+      process.env.NEXT_PUBLIC_CHAT_API_URL.replace(
+        "{{pr_id}}",
+        process.env.VERCEL_GIT_PULL_REQUEST_ID,
+      );
+};
+
+injectViewerUrlIfVercelPreview(process.env.NEXT_PUBLIC_VIEWER_URL);
+
+configureRuntimeEnv();
+
+const landingPagePaths = [
+  "/",
+  "/pricing",
+  "/privacy-policy",
+  "/terms-of-service",
+  "/about",
+  "/oss-friends",
+  "/business-continuity",
+  "/blog",
+  "/blog/:slug*",
+  "/templates",
+  "/templates/:slug*",
+];
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  transpilePackages: ["@typebot.io/settings"],
+  reactStrictMode: true,
+  output: "standalone",
+  outputFileTracingRoot: join(__dirname, "../../"),
+  async redirects() {
+    return [
+      {
+        source: "/discord",
+        destination: "https://discord.gg/xjyQczWAXV",
+        permanent: true,
+      },
+      ...landingPagePaths.map((path) => ({
+        source: path,
+        has: [{ type: "host", value: "typebot.io" }],
+        destination: `https://typebot.com${path}`,
+        permanent: true,
+      })),
+    ];
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/api/typebots/:typebotId/blocks/:blockId/storage/upload-url",
+          destination:
+            "/api/v1/typebots/:typebotId/blocks/:blockId/storage/upload-url",
+        },
+        {
+          source: "/healthz",
+          destination: "/api/healthz",
+        },
+      ].concat(
+        process.env.NEXTAUTH_URL
+          ? [
+              {
+                source:
+                  "/api/typebots/:typebotId/blocks/:blockId/steps/:stepId/sampleResult",
+                destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/getResultExample`,
+              },
+              {
+                source: "/api/typebots/:typebotId/blocks/:blockId/sampleResult",
+                destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/getResultExample`,
+              },
+              {
+                source:
+                  "/api/typebots/:typebotId/blocks/:blockId/steps/:stepId/unsubscribeWebhook",
+                destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/unsubscribe`,
+              },
+              {
+                source:
+                  "/api/typebots/:typebotId/blocks/:blockId/unsubscribeWebhook",
+                destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/unsubscribe`,
+              },
+              {
+                source:
+                  "/api/typebots/:typebotId/blocks/:blockId/steps/:stepId/subscribeWebhook",
+                destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/subscribe`,
+              },
+              {
+                source:
+                  "/api/typebots/:typebotId/blocks/:blockId/subscribeWebhook",
+                destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/subscribe`,
+              },
+            ]
+          : [],
+      ),
+    };
+  },
+};
+
+export default async function config() {
+  // Avoid loading env package when NX is creating the graph (nx-ignore command)
+  if (global.NX_GRAPH_CREATION) return nextConfig;
+
+  await import("@typebot.io/env/compiled");
+
+  return process.env.SENTRY_DSN
+    ? withSentryConfig(nextConfig, {
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        widenClientFileUpload: true,
+        // Only print logs for uploading source maps in CI
+        silent: !process.env.CI,
+      })
+    : nextConfig;
+}

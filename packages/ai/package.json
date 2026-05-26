@@ -1,0 +1,22 @@
+{
+  "name": "@typebot.io/ai",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@typebot.io/forge": "workspace:*",
+    "@typebot.io/lib": "workspace:*",
+    "@typebot.io/variables": "workspace:*",
+    "ai": "^5.0.52",
+    "ky": "^1.2.4",
+    "@typebot.io/runtime-session-store": "workspace:*",
+    "zod": "^4.3.5"
+  }
+}

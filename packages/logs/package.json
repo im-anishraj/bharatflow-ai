@@ -1,0 +1,20 @@
+{
+  "name": "@typebot.io/logs",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "devDependencies": {
+    "@typebot.io/prisma": "workspace:*"
+  },
+  "dependencies": {
+    "zod": "^4.3.5"
+  }
+}

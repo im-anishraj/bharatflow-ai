@@ -1,0 +1,113 @@
+import { useMutation } from "@tanstack/react-query";
+import type { CreatableCredentials } from "@typebot.io/credentials/schemas";
+import { Alert } from "@typebot.io/ui/components/Alert";
+import { Button } from "@typebot.io/ui/components/Button";
+import { Dialog } from "@typebot.io/ui/components/Dialog";
+import { Field } from "@typebot.io/ui/components/Field";
+import { Input } from "@typebot.io/ui/components/Input";
+import { TriangleAlertIcon } from "@typebot.io/ui/icons/TriangleAlertIcon";
+import type React from "react";
+import { useState } from "react";
+import { TextLink } from "@/components/TextLink";
+import { useWorkspace } from "@/features/workspace/WorkspaceProvider";
+import { orpc, queryClient } from "@/lib/queryClient";
+import { toast } from "@/lib/toast";
+
+const openAITokensPage = "https://platform.openai.com/account/api-keys";
+
+type Props = {
+  isOpen: boolean;
+  onClose: () => void;
+  onNewCredentials: (id: string) => void;
+};
+
+export const OpenAICredentialsDialog = ({
+  isOpen,
+  onClose,
+  onNewCredentials,
+}: Props) => {
+  const { workspace } = useWorkspace();
+  const [apiKey, setApiKey] = useState("");
+  const [name, setName] = useState("");
+
+  const [isCreating, setIsCreating] = useState(false);
+
+  const { mutate } = useMutation(
+    orpc.credentials.createCredentials.mutationOptions({
+      onMutate: () => setIsCreating(true),
+      onSettled: () => setIsCreating(false),
+      onError: (err) => {
+        toast({
+          description: err.message,
+        });
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({
+          queryKey: orpc.credentials.listCredentials.key(),
+        });
+        onNewCredentials(data.credentialsId);
+        onClose();
+      },
+    }),
+  );
+
+  const createOpenAICredentials = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!workspace) return;
+    mutate({
+      scope: "workspace",
+      workspaceId: workspace.id,
+      credentials: {
+        type: "openai",
+        name,
+        data: {
+          apiKey,
+        },
+      } as CreatableCredentials,
+    });
+  };
+
+  return (
+    <Dialog.Root isOpen={isOpen} onClose={onClose}>
+      <Dialog.Title>Add OpenAI account</Dialog.Title>
+      <Dialog.CloseButton />
+      <Dialog.Popup render={<form onSubmit={createOpenAICredentials} />}>
+        <Field.Root>
+          <Field.Label>Name</Field.Label>
+          <Input onValueChange={setName} placeholder="My account" />
+        </Field.Root>
+        <Field.Root>
+          <Field.Label>API key</Field.Label>
+          <Input
+            type="password"
+            onValueChange={setApiKey}
+            placeholder="sk-..."
+          />
+          <Field.Description>
+            You can generate an API key{" "}
+            <TextLink href={openAITokensPage} isExternal>
+              here
+            </TextLink>
+            .
+          </Field.Description>
+        </Field.Root>
+        <Alert.Root variant="warning">
+          <TriangleAlertIcon />
+          <Alert.Description>
+            Make sure to add a payment method to your OpenAI account. Otherwise,
+            it will not work after a few messages.
+          </Alert.Description>
+        </Alert.Root>
+
+        <Dialog.Footer>
+          <Button
+            type="submit"
+            disabled={apiKey === "" || name === "" || isCreating}
+          >
+            Create
+          </Button>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog.Root>
+  );
+};

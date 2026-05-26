@@ -1,0 +1,27 @@
+{
+  "name": "@typebot.io/chat-session",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@typebot.io/theme": "workspace:*",
+    "@typebot.io/prisma": "workspace:*",
+    "@typebot.io/blocks-core": "workspace:*",
+    "@typebot.io/results": "workspace:*",
+    "@typebot.io/settings": "workspace:*",
+    "@typebot.io/typebot": "workspace:*",
+    "@typebot.io/variables": "workspace:*",
+    "@typebot.io/chat-api": "workspace:*",
+    "@sentry/nextjs": "^10.43.0",
+    "zod": "^4.3.5"
+  },
+  "scripts": {}
+}

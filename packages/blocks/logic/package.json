@@ -1,0 +1,19 @@
+{
+  "name": "@typebot.io/blocks-logic",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@typebot.io/blocks-base": "workspace:*",
+    "@typebot.io/conditions": "workspace:*",
+    "zod": "^4.3.5"
+  }
+}

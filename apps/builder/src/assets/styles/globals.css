@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import "@typebot.io/ui/theme.css";
+@source "../../";
+@source "../../../../../packages/";
+
+:root {
+  --header-height: 56px;
+}
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-medium;
+  }
+
+  ol {
+    @apply list-decimal pl-4 flex flex-col gap-4 ms-4;
+  }
+
+  code {
+    @apply bg-gray-3 px-1 py-0.5 rounded-md text-sm text-gray-11;
+  }
+}
+
+/* Offset top position so that it is right below onboarding header */
+typebot-standard.onboarding-typebot::part(progress-bar-container) {
+  top: 55px;
+}
+
+/* https://base-ui.com/react/overview/quick-start#set-up-portals */
+#__next {
+  isolation: isolate;
+}

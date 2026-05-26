@@ -1,0 +1,5 @@
+src
+tailwind.config.cjs
+postcss.config.cjs
+tsconfig.json
+esbuild.web.config.cjs

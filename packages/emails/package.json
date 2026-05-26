@@ -1,0 +1,40 @@
+{
+  "name": "@typebot.io/emails",
+  "type": "module",
+  "scripts": {
+    "preview": "SKIP_ENV_CHECK=true email dev --port=3005 --dir=transactional",
+    "preview-marketing": "SKIP_ENV_CHECK=true email dev --port=3005 --dir=marketing",
+    "test": "bun test"
+  },
+  "exports": {
+    "./*": {
+      "types": "./*.tsx",
+      "import": "./*.tsx",
+      "default": "./*.tsx"
+    },
+    "./helpers/*": {
+      "types": "./helpers/*.ts",
+      "import": "./helpers/*.ts",
+      "default": "./helpers/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@react-email/components": "^0.5.1",
+    "@typebot.io/prisma": "workspace:*",
+    "@typebot.io/env": "workspace:*",
+    "effect": "4.0.0-beta.38",
+    "nodemailer": "^8.0.5",
+    "react-email": "^4.2.8",
+    "@react-email/render": "^1.2.1",
+    "@typebot.io/lib": "workspace:*",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@react-email/preview-server": "^4.2.8",
+    "dotenv-cli": "^8.0.0",
+    "@types/react": "^19.2.14",
+    "@types/nodemailer": "^8.0.0"
+  }
+}

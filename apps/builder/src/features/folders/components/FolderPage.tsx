@@ -1,0 +1,48 @@
+import { ORPCError } from "@orpc/client";
+import { useQuery } from "@tanstack/react-query";
+import { useTranslate } from "@tolgee/react";
+import { LoaderCircleIcon } from "@typebot.io/ui/icons/LoaderCircleIcon";
+import { useRouter } from "next/router";
+import { NotFoundPage } from "@/components/NotFoundPage";
+import { Seo } from "@/components/Seo";
+import { DashboardHeader } from "@/features/dashboard/components/DashboardHeader";
+import { useWorkspace } from "@/features/workspace/WorkspaceProvider";
+import { orpc } from "@/lib/queryClient";
+import { TypebotDndProvider } from "../TypebotDndProvider";
+import { FolderContent } from "./FolderContent";
+
+export const FolderPage = () => {
+  const { t } = useTranslate();
+  const router = useRouter();
+  const { workspace, currentUserMode } = useWorkspace();
+
+  const { data: { folder } = {}, error } = useQuery(
+    orpc.folders.getFolder.queryOptions({
+      input: {
+        folderId: router.query.id as string,
+        workspaceId: workspace?.id as string,
+      },
+      enabled: !!workspace && !!router.query.id && currentUserMode !== "guest",
+      retry: 0,
+    }),
+  );
+
+  if (error instanceof ORPCError && error.code === "NOT_FOUND")
+    return <NotFoundPage resourceName="Folder" />;
+
+  return (
+    <div className="flex flex-col gap-2 min-h-screen">
+      <Seo title={t("dashboard.title")} />
+      <DashboardHeader />
+      <TypebotDndProvider>
+        {!folder ? (
+          <div className="flex flex-1">
+            <LoaderCircleIcon className="animate-spin mx-auto" />
+          </div>
+        ) : (
+          <FolderContent folder={folder} />
+        )}
+      </TypebotDndProvider>
+    </div>
+  );
+};

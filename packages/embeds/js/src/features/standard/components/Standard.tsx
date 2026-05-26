@@ -1,0 +1,105 @@
+import { EnvironmentProvider } from "@ark-ui/solid";
+import typebotColors from "@typebot.io/ui/colors.css";
+import { createEffect, createSignal, onCleanup, onMount, Show } from "solid-js";
+import styles from "../../../assets/index.css";
+import { Bot, type BotProps } from "../../../components/Bot";
+import { wipeExistingChatStateInStorage } from "../../../utils/storage";
+import type { CommandData } from "../../commands/types";
+
+const hostElementCss = `
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+`;
+
+export const Standard = (props: BotProps, { element }: { element: any }) => {
+  const [isBotDisplayed, setIsBotDisplayed] = createSignal(false);
+  const [prefilledVariables, setPrefilledVariables] = createSignal(
+    props.prefilledVariables,
+  );
+  const [currentTypebotId, setCurrentTypebotId] = createSignal<string>();
+
+  const launchBot = () => {
+    setIsBotDisplayed(true);
+  };
+
+  const reloadBot = () => {
+    setIsBotDisplayed(false);
+    setTimeout(() => {
+      setIsBotDisplayed(true);
+    }, 1);
+  };
+
+  const botLauncherObserver = new IntersectionObserver((intersections) => {
+    if (intersections.some((intersection) => intersection.isIntersecting))
+      launchBot();
+  });
+
+  onMount(() => {
+    window.addEventListener("message", processIncomingEvent);
+    botLauncherObserver.observe(element);
+  });
+
+  createEffect(() => {
+    if (!props.prefilledVariables) return;
+    setPrefilledVariables((existingPrefilledVariables) => ({
+      ...existingPrefilledVariables,
+      ...props.prefilledVariables,
+    }));
+  });
+
+  const processIncomingEvent = (event: MessageEvent<CommandData>) => {
+    const { data } = event;
+    const elementId = element.id || props.id;
+    if (!data.isFromTypebot || (data.id && elementId !== data.id)) return;
+    switch (data.command) {
+      case "setPrefilledVariables":
+        setPrefilledVariables((existingPrefilledVariables) => ({
+          ...existingPrefilledVariables,
+          ...data.variables,
+        }));
+        break;
+      case "reload":
+        reloadBot();
+        break;
+      case "reset": {
+        const typebotId = currentTypebotId();
+        if (!typebotId) return;
+        wipeExistingChatStateInStorage(typebotId);
+        break;
+      }
+    }
+  };
+
+  const handleOnChatStatePersisted = (
+    isEnabled: boolean,
+    { typebotId }: { typebotId: string },
+  ) => {
+    setCurrentTypebotId(typebotId);
+    props.onChatStatePersisted?.(isEnabled, { typebotId });
+  };
+
+  onCleanup(() => {
+    botLauncherObserver.disconnect();
+  });
+
+  return (
+    <EnvironmentProvider value={element.shadowRoot as Node}>
+      <style>
+        {typebotColors}
+        {styles}
+        {hostElementCss}
+      </style>
+      <Show when={isBotDisplayed()}>
+        <Bot
+          {...props}
+          prefilledVariables={prefilledVariables()}
+          onChatStatePersisted={handleOnChatStatePersisted}
+        />
+      </Show>
+    </EnvironmentProvider>
+  );
+};

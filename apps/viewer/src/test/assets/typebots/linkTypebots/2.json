@@ -1,0 +1,124 @@
+{
+  "version": "6.1",
+  "id": "cl0ibhv8d0130n21aw8doxhj5",
+  "name": "2",
+  "events": [
+    {
+      "id": "clbovazhy000q3b6o716dlfq8",
+      "outgoingEdgeId": "clbovazhy000s3b6ocjqtqedw",
+      "graphCoordinates": { "x": 0, "y": 0 },
+      "type": "start"
+    }
+  ],
+  "groups": [
+    {
+      "id": "clbovazhy000r3b6onjzopbsn",
+      "title": "Group #1",
+      "graphCoordinates": { "x": 366, "y": 191 },
+      "blocks": [
+        {
+          "id": "mvei6gv9r2c7aliws03wjq42",
+          "type": "Set variable",
+          "options": {
+            "variableId": "viwz31ebsd50rrmas15t8dl8c",
+            "isExecutedOnClient": true,
+            "expressionToEvaluate": "location.href",
+            "isCode": true
+          }
+        },
+        {
+          "id": "s8ZeBL9p5za77eBmdKECLYq",
+          "type": "text input",
+          "options": {
+            "labels": {
+              "placeholder": "Type your answer...",
+              "button": "Send"
+            },
+            "isLong": false
+          }
+        },
+        {
+          "id": "p69tpk4rivsjmjti56ufdh89",
+          "type": "Jump",
+          "options": { "groupId": "clbovb3vu00103b6o1pjjuagi" }
+        }
+      ]
+    },
+    {
+      "id": "clbovb3vu00103b6o1pjjuagi",
+      "title": "Group #2",
+      "graphCoordinates": { "x": 740, "y": 288 },
+      "blocks": [
+        {
+          "id": "clbovb3vv00113b6oaa35zfvm",
+          "type": "text",
+          "content": {
+            "richText": [{ "type": "p", "children": [{ "text": "Cheers!" }] }]
+          }
+        },
+        {
+          "id": "zqoitsp26zdwb7rzsdex30o4",
+          "type": "Typebot link",
+          "options": {
+            "typebotId": "cmb59sp8b00017f8m3ni5vsqm",
+            "mergeResults": true
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "clbovazhy000s3b6ocjqtqedw",
+      "from": { "eventId": "clbovazhy000q3b6o716dlfq8" },
+      "to": { "groupId": "clbovazhy000r3b6onjzopbsn" }
+    }
+  ],
+  "variables": [
+    {
+      "id": "viwz31ebsd50rrmas15t8dl8c",
+      "name": "URL",
+      "isSessionVariable": true
+    }
+  ],
+  "theme": {
+    "general": { "font": "Open Sans", "background": { "type": "None" } },
+    "chat": {
+      "hostAvatar": {
+        "isEnabled": true,
+        "url": "https://avatars.githubusercontent.com/u/16015833?v=4"
+      },
+      "hostBubbles": { "backgroundColor": "#F7F8FF", "color": "#303235" },
+      "guestBubbles": { "backgroundColor": "#FF8E21", "color": "#FFFFFF" },
+      "buttons": { "backgroundColor": "#0042DA", "color": "#FFFFFF" },
+      "inputs": {
+        "backgroundColor": "#FFFFFF",
+        "color": "#303235",
+        "placeholderColor": "#9095A0"
+      }
+    }
+  },
+  "selectedThemeTemplateId": null,
+  "settings": {
+    "general": {
+      "isBrandingEnabled": true,
+      "isNewResultOnRefreshEnabled": false
+    },
+    "typingEmulation": { "enabled": true, "speed": 300, "maxDelay": 1.5 },
+    "metadata": {
+      "description": "Build beautiful conversational forms and embed them directly in your applications without a line of code. Triple your response rate and collect answers that has more value compared to a traditional form."
+    }
+  },
+  "createdAt": "2022-12-15T09:17:00.598Z",
+  "updatedAt": "2025-05-26T15:58:09.557Z",
+  "icon": null,
+  "folderId": null,
+  "publicId": "cl0ibhv8d0130n21aw8doxhj5-public",
+  "customDomain": null,
+  "workspaceId": "proWorkspace",
+  "resultsTablePreferences": null,
+  "isArchived": false,
+  "isClosed": false,
+  "whatsAppCredentialsId": null,
+  "riskLevel": null
+}

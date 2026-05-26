@@ -1,0 +1,56 @@
+{
+  "name": "@typebot.io/whatsapp",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "nx": {
+    "targets": {
+      "test": {
+        "executor": "@nx/vitest:test",
+        "outputs": [
+          "{options.reportsDirectory}"
+        ],
+        "options": {
+          "configFile": "{projectRoot}/vitest.config.mts",
+          "project": "@typebot.io/whatsapp",
+          "reportsDirectory": "../../coverage/packages/whatsapp"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@typebot.io/blocks-core": "workspace:*",
+    "@typebot.io/bot-engine": "workspace:*",
+    "@typebot.io/conditions": "workspace:*",
+    "@typebot.io/env": "workspace:*",
+    "@typebot.io/groups": "workspace:*",
+    "@typebot.io/lib": "workspace:*",
+    "@typebot.io/rich-text": "workspace:*",
+    "@typebot.io/settings": "workspace:*",
+    "@typebot.io/typebot": "workspace:*",
+    "@typebot.io/variables": "workspace:*",
+    "@typebot.io/blocks-bubbles": "workspace:*",
+    "@typebot.io/blocks-inputs": "workspace:*",
+    "@typebot.io/prisma": "workspace:*",
+    "@typebot.io/chat-session": "workspace:*",
+    "@typebot.io/credentials": "workspace:*",
+    "@typebot.io/chat-api": "workspace:*",
+    "@sentry/nextjs": "^10.43.0",
+    "@typebot.io/config": "workspace:*",
+    "ky": "^1.2.4",
+    "@typebot.io/runtime-session-store": "workspace:*",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.0.18"
+  }
+}

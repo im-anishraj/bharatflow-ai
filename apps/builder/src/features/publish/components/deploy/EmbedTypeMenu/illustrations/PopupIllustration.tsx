@@ -1,0 +1,69 @@
+import { motion } from "motion/react";
+import { animationVariants } from "./animationVariants";
+
+export const PopupIllustration = () => {
+  return (
+    <svg
+      width="100"
+      viewBox="0 0 500 500"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="light"
+    >
+      <title>Popup Illustration</title>
+      <rect width="500" height="500" rx="20" className="fill-gray-6" />
+      <rect x="105" y="77" width="290" height="352" rx="10" fill="#0042DA" />
+      <motion.rect
+        x="171"
+        y="117"
+        width="156"
+        height="34"
+        rx="10"
+        className="fill-blue-1"
+        variants={animationVariants}
+      />
+      <motion.rect
+        x="171"
+        y="160"
+        width="156"
+        height="65"
+        rx="10"
+        className="fill-blue-1"
+        variants={animationVariants}
+      />
+
+      <motion.circle
+        cx="142"
+        cy="254"
+        r="20"
+        className="fill-blue-1"
+        variants={animationVariants}
+      />
+      <motion.rect
+        x="171"
+        y="234"
+        width="156"
+        height="40"
+        rx="10"
+        className="fill-blue-1"
+        variants={animationVariants}
+      />
+      <motion.circle
+        cx="356"
+        cy="303"
+        r="20"
+        className="fill-blue-1"
+        variants={animationVariants}
+      />
+      <motion.rect
+        x="197"
+        y="283"
+        width="130"
+        height="40"
+        rx="10"
+        className="fill-blue-1"
+        variants={animationVariants}
+      />
+    </svg>
+  );
+};

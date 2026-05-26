@@ -1,0 +1,134 @@
+{
+  "version": "6.1",
+  "id": "u26l1t6941c1zbv7t9i3ds2r",
+  "name": "My typebot",
+  "events": [
+    {
+      "id": "dqork4dJJZk3RgKYavBpRE",
+      "outgoingEdgeId": "b3XsreaqtWt4CrZZmCKDpa",
+      "graphCoordinates": { "x": 0, "y": 0 },
+      "type": "start"
+    }
+  ],
+  "groups": [
+    {
+      "id": "2Vrpgk5VP9BUo3vKtM5kws",
+      "title": "Group #1",
+      "graphCoordinates": { "x": 386, "y": 108 },
+      "blocks": [
+        {
+          "id": "s6GezsfD612D1naKwvhDFgA",
+          "type": "text",
+          "content": {
+            "richText": [
+              { "type": "p", "children": [{ "text": "Hi what's your name?" }] }
+            ]
+          }
+        },
+        {
+          "id": "sq3mPXUrugs5t6FoME3T4t4",
+          "type": "text input",
+          "options": {
+            "labels": {
+              "placeholder": "Type your answer...",
+              "button": "Send"
+            },
+            "variableId": "93BD32WVM5JEQ1nmWtr2S5",
+            "isLong": false
+          }
+        },
+        {
+          "id": "s57hbzfpG2sVvXefznVhbVB",
+          "type": "text",
+          "content": {
+            "richText": [
+              { "type": "p", "children": [{ "text": "How old are you?" }] }
+            ]
+          }
+        },
+        {
+          "id": "s4fFn3s7nouQk88iJ3oLgx6",
+          "type": "number input",
+          "options": {
+            "labels": { "placeholder": "Type a number...", "button": "Send" }
+          }
+        },
+        {
+          "id": "scR6MewJwkPNJzABYG8NEA4",
+          "type": "text",
+          "content": {
+            "richText": [{ "type": "p", "children": [{ "text": "Cool!" }] }]
+          }
+        },
+        {
+          "id": "s5fo1s8UTyHQ7CfqC6MRxyW",
+          "type": "text",
+          "content": {
+            "richText": [
+              { "type": "p", "children": [{ "text": "Do you eat pizza?" }] }
+            ]
+          }
+        },
+        {
+          "id": "sxn8UjQ2MjEMuRjhkh7LWws",
+          "type": "choice input",
+          "items": [
+            { "id": "wGKXMr4mfySw1HNThND2Xd", "content": "Yes" },
+            { "id": "qzqzVqMeo6TDUdMYckLZmf", "content": "No" }
+          ],
+          "options": { "isMultipleChoice": false, "buttonLabel": "Send" }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "b3XsreaqtWt4CrZZmCKDpa",
+      "from": { "eventId": "dqork4dJJZk3RgKYavBpRE" },
+      "to": { "groupId": "2Vrpgk5VP9BUo3vKtM5kws" }
+    }
+  ],
+  "variables": [
+    {
+      "id": "93BD32WVM5JEQ1nmWtr2S5",
+      "name": "Name",
+      "isSessionVariable": false
+    }
+  ],
+  "theme": {
+    "general": { "font": "Open Sans", "background": { "type": "None" } },
+    "chat": {
+      "hostBubbles": { "backgroundColor": "#F7F8FF", "color": "#303235" },
+      "guestBubbles": { "backgroundColor": "#FF8E21", "color": "#FFFFFF" },
+      "buttons": { "backgroundColor": "#0042DA", "color": "#FFFFFF" },
+      "inputs": {
+        "backgroundColor": "#FFFFFF",
+        "color": "#303235",
+        "placeholderColor": "#9095A0"
+      }
+    }
+  },
+  "selectedThemeTemplateId": null,
+  "settings": {
+    "general": {
+      "isBrandingEnabled": true,
+      "isNewResultOnRefreshEnabled": false
+    },
+    "typingEmulation": { "enabled": true, "speed": 300, "maxDelay": 1.5 },
+    "metadata": {
+      "description": "Build beautiful conversational forms and embed them directly in your applications without a line of code. Triple your response rate and collect answers that has more value compared to a traditional form."
+    }
+  },
+  "createdAt": "2025-02-12T18:10:08.273Z",
+  "updatedAt": "2025-02-12T18:10:08.273Z",
+  "icon": null,
+  "folderId": null,
+  "publicId": null,
+  "customDomain": null,
+  "workspaceId": "proWorkspace",
+  "resultsTablePreferences": null,
+  "isArchived": false,
+  "isClosed": false,
+  "whatsAppCredentialsId": null,
+  "riskLevel": null
+}

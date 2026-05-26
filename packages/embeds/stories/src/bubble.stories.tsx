@@ -1,0 +1,86 @@
+import {
+  Bubble,
+  close,
+  hidePreviewMessage,
+  open,
+  reload,
+  reset,
+  sendCommand,
+  setInputValue,
+  setPrefilledVariables,
+  showPreviewMessage,
+  submitInput,
+  toggle,
+} from "@typebot.io/react";
+import { useState } from "react";
+
+export const Default = () => {
+  const [name, setName] = useState("John");
+
+  return (
+    <div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <button type="button" onClick={() => toggle()}>
+          Toggle chat window
+        </button>
+        <button type="button" onClick={() => open()}>
+          Open chat window
+        </button>
+        <button type="button" onClick={() => close()}>
+          Close chat window
+        </button>
+        <button type="button" onClick={() => reload()}>
+          Reload chat
+        </button>
+        <button type="button" onClick={() => showPreviewMessage(undefined)}>
+          Show Preview Message
+        </button>
+        <button type="button" onClick={() => setInputValue("YOOOO!")}>
+          Set input value
+        </button>
+        <button type="button" onClick={() => submitInput()}>
+          Submit input
+        </button>
+        <button type="button" onClick={() => hidePreviewMessage()}>
+          Close Preview Message
+        </button>
+        <button type="button" onClick={() => reset()}>
+          Reset chat
+        </button>
+        <button type="button" onClick={() => sendCommand("wizz")}>
+          Send command
+        </button>
+        <div>
+          <p>Predefined name:</p>
+          <input value={name} onChange={(e) => setName(e.target.value)} />
+          <button
+            type="button"
+            onClick={() => setPrefilledVariables({ Name: name })}
+          >
+            Set predefined name
+          </button>
+        </div>
+        <Bubble
+          typebot="lead-generation-2jo5mke"
+          apiHost="http://localhost:3001"
+          wsHost="localhost:1999"
+          prefilledVariables={{
+            Name: "John",
+          }}
+          previewMessage={{
+            avatarUrl: "https://avatars.githubusercontent.com/u/16015833?v=4",
+            message: "Hello, I am a preview message",
+            autoShowDelay: 3000,
+          }}
+          theme={{
+            button: {
+              customIconSrc:
+                "https://avatars.githubusercontent.com/u/16015833?v=4",
+            },
+          }}
+          // isPreview
+        />
+      </div>
+    </div>
+  );
+};

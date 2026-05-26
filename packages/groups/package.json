@@ -1,0 +1,19 @@
+{
+  "name": "@typebot.io/groups",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@typebot.io/blocks-core": "workspace:*",
+    "@typebot.io/schemas": "workspace:*",
+    "zod": "^4.3.5"
+  }
+}

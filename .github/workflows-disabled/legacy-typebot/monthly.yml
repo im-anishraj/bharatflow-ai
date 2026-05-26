@@ -1,0 +1,28 @@
+name: Monthly job
+
+on:
+  schedule:
+    - cron: "30 6 1 * *"
+
+permissions:
+  contents: read
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: "${{ secrets.DATABASE_URL }}"
+      DATABASE_URL_REPLICA: "${{ secrets.DATABASE_URL_REPLICA }}"
+      ENCRYPTION_SECRET: "${{ secrets.ENCRYPTION_SECRET }}"
+      NEXTAUTH_URL: "http://localhost:3000"
+      NEXT_PUBLIC_VIEWER_URL: "http://localhost:3001"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: "package.json"
+      - run: bun install
+      - run: bunx nx run @typebot.io/scripts:cron:monthly

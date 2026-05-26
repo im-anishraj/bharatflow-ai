@@ -1,0 +1,31 @@
+{
+  "name": "@typebot.io/billing",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@typebot.io/prisma": "workspace:*",
+    "@typebot.io/schemas": "workspace:*",
+    "stripe": "17.1.0",
+    "@typebot.io/lib": "workspace:*",
+    "@orpc/server": "^1.13.9",
+    "@typebot.io/env": "workspace:*",
+    "@typebot.io/telemetry": "workspace:*",
+    "@typebot.io/workspaces": "workspace:*",
+    "@typebot.io/settings": "workspace:*",
+    "@typebot.io/user": "workspace:*",
+    "micro": "^10.0.1",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.13"
+  }
+}

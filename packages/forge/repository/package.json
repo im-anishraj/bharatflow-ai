@@ -1,0 +1,36 @@
+{
+  "name": "@typebot.io/forge-repository",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@typebot.io/openai-block": "workspace:*",
+    "@typebot.io/cal-com-block": "workspace:*",
+    "@typebot.io/chat-node-block": "workspace:*",
+    "@typebot.io/qrcode-block": "workspace:*",
+    "@typebot.io/dify-ai-block": "workspace:*",
+    "@typebot.io/mistral-block": "workspace:*",
+    "@typebot.io/elevenlabs-block": "workspace:*",
+    "@typebot.io/anthropic-block": "workspace:*",
+    "@typebot.io/together-ai-block": "workspace:*",
+    "@typebot.io/open-router-block": "workspace:*",
+    "@typebot.io/nocodb-block": "workspace:*",
+    "@typebot.io/segment-block": "workspace:*",
+    "@typebot.io/groq-block": "workspace:*",
+    "@typebot.io/zendesk-block": "workspace:*",
+    "@typebot.io/posthog-block": "workspace:*",
+    "@typebot.io/perplexity-block": "workspace:*",
+    "@typebot.io/deepseek-block": "workspace:*",
+    "@typebot.io/blink-block": "workspace:*",
+    "@typebot.io/gmail-block": "workspace:*",
+    "zod": "^4.3.5"
+  }
+}

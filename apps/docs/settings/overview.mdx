@@ -1,0 +1,83 @@
+---
+sidebarTitle: Overview
+title: Settings
+icon: wrench
+---
+
+## General
+
+The general settings represent the general behaviors of your typebot.
+
+<Frame style={{ maxWidth: "400px" }}>
+  <img src="/images/settings/general.png" alt="General" />
+</Frame>
+
+- **Prefill input**: If enabled, the inputs will be automatically pre-filled whenever their associated variable has a value.
+- **Hide query params on bot start**: If enabled, the query params will be hidden when the bot starts.
+- [**Remember user**](./remember-user)
+- **System messages**: You can overwrite any system message of your bot, it includes the default invalid message bot response, the network error message, the bot is closed, etc.
+
+## Typing emulation
+
+By default, your typebot will emulate a certain typing speed. It is considered a good default as slow as a human typing speed and it's not too fast so that multiple bubbles can be read sequentially.
+
+You can customize this typing speed in the settings:
+
+<Frame style={{ maxWidth: "400px" }}>
+  <img src="/images/settings/typing-emulation.png" alt="Typing emulation" />
+</Frame>
+
+The goal of a typebot is not to pretend that the bot is a real human. So we suggest not setting the typing speed too low.
+
+The `Disable on first message` allows you to disable the typing emulation on the first message. This is useful if you want to lower the first message display time since the site can take some time to load first.
+
+The `Delay between messages` by default is 0 and you can increase it up to 5 seconds if you want to add a delay between **every** messages sent by the typebot. If you ever want to pause the bot just once. You can insert a [Wait block](../editor/blocks/logic/wait) between both messages.
+
+## Security
+
+By default, your typebot can be executed from any origin but you can restrict the execution of your typebot to specific origins. This is useful if you want to embed your typebot in your website and prevent it from being executed on other websites by malicious actors.
+
+For example, if you want to allow your typebot to be executed only on `https://my-company.com`, you can add `https://my-company.com` to the list of allowed origins.
+
+<Warning>
+  If you add a URL to the list but omit https://typebot.co, then your typebot
+  shareable URL will not work anymore.
+</Warning>
+
+## Metadata
+
+In the Metadata section, you can customize how the preview card will look if you share your bot URL on social media for example.
+
+You can also add some custom head code to add third-party scripts.
+
+### Icon, image, title and description
+
+- **Icon**: The small icon shown in the browser tab of your bot’s standalone page. Click the icon preview in Metadata to upload a new one. Recommended format: PNG or SVG, 32×32 or 48×48. If you embed your Typebot inside an existing website, the website’s favicon is used instead.
+
+- **Image (social share image)**: Displayed when your bot link is shared on social networks and messaging apps. Recommended size: 1200×630 px (1.91:1 ratio), JPG or PNG. Keep the file reasonably small for faster loading.
+
+- **Title**: Used for the page `<title>` and Open Graph `og:title`. If left empty, your bot name is used.
+
+- **Description**: Used for the meta description and Open Graph `og:description`. If left empty, a sensible default description is used.
+
+- **Allow indexing**: Toggle to allow search engines to index your bot’s standalone page. Disable it if you want to keep it out of search results.
+
+### Troubleshooting: I don’t see my new metadata
+
+- **Hard refresh your browser**: Clear cache or perform a hard reload to fetch the latest favicon and meta tags.
+
+- **Force social platforms to re-scrape**: Social networks cache previews aggressively. Use their tools to refresh:
+
+  - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+  - [X Card Validator](https://cards-dev.x.com/validator)
+  - [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
+
+- **If you embed the bot**: The parent page controls favicon and Open Graph tags. Update the metadata in your website rather than in the bot settings.
+
+- **Give it a few minutes**: Caches can take a short time to expire. Search engines may also reflect changes after their next crawl, especially if indexing is enabled.
+
+### Google Tag Manager
+
+Allows you to easily add a GTM container to your bot. To find your GTM container ID, go to your GTM dashboard and click on the container you want to use. The ID is displayed in the top right corner.
+
+Note that you should not include it if you are embedding your typebot in an existing website. GTM should be installed in the parent website instead.

@@ -1,0 +1,50 @@
+{
+  "version": "6.1",
+  "id": "cmb59yuxp00047f8mxib546ug",
+  "name": "1 Merge disabled",
+  "events": [
+    {
+      "id": "r7hllknwngd8iry7qt81a1zr",
+      "graphCoordinates": { "x": 0, "y": 0 },
+      "type": "start",
+      "outgoingEdgeId": "u1yd0fztvkbnplz4g4hax1w2"
+    }
+  ],
+  "groups": [
+    {
+      "id": "mgzw1o1x2pihywlk2kj99bs3",
+      "graphCoordinates": { "x": 277, "y": 95 },
+      "title": "Group #1",
+      "blocks": [
+        {
+          "id": "h2uu05ez4cx5bf9ksvqtt57w",
+          "type": "Typebot link",
+          "options": { "typebotId": "cl0ibhv8d0130n21aw8doxhj5" }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": { "eventId": "r7hllknwngd8iry7qt81a1zr" },
+      "to": { "groupId": "mgzw1o1x2pihywlk2kj99bs3" },
+      "id": "u1yd0fztvkbnplz4g4hax1w2"
+    }
+  ],
+  "variables": [],
+  "theme": {},
+  "selectedThemeTemplateId": null,
+  "settings": {},
+  "createdAt": "2025-05-26T16:01:29.630Z",
+  "updatedAt": "2025-05-26T16:01:29.630Z",
+  "icon": null,
+  "folderId": null,
+  "publicId": null,
+  "customDomain": null,
+  "workspaceId": "proWorkspace",
+  "resultsTablePreferences": null,
+  "isArchived": false,
+  "isClosed": false,
+  "whatsAppCredentialsId": null,
+  "riskLevel": null
+}

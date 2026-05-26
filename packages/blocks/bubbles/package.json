@@ -1,0 +1,20 @@
+{
+  "name": "@typebot.io/blocks-bubbles",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "import": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@typebot.io/blocks-base": "workspace:*",
+    "@typebot.io/variables": "workspace:*",
+    "@typebot.io/rich-text": "workspace:*",
+    "zod": "^4.3.5"
+  }
+}

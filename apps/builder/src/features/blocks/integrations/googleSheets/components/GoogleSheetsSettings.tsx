@@ -1,0 +1,298 @@
+import { useQuery } from "@tanstack/react-query";
+import {
+  defaultGoogleSheetsOptions,
+  GoogleSheetsAction,
+  totalRowsToExtractOptions,
+} from "@typebot.io/blocks-integrations/googleSheets/constants";
+import type {
+  Cell,
+  ExtractingCell,
+  GoogleSheetsBlock,
+  GoogleSheetsGetOptions,
+  GoogleSheetsGetOptionsV6,
+  GoogleSheetsInsertRowOptions,
+  GoogleSheetsUpdateRowOptionsV6,
+} from "@typebot.io/blocks-integrations/googleSheets/schema";
+import { isDefined } from "@typebot.io/lib/utils";
+import { Accordion } from "@typebot.io/ui/components/Accordion";
+import { useOpenControls } from "@typebot.io/ui/hooks/useOpenControls";
+import { useMemo } from "react";
+import { BasicSelect } from "@/components/inputs/BasicSelect";
+import { TableList } from "@/components/TableList";
+import { CredentialsDropdown } from "@/features/credentials/components/CredentialsDropdown";
+import { useTypebot } from "@/features/editor/providers/TypebotProvider";
+import { useWorkspace } from "@/features/workspace/WorkspaceProvider";
+import { orpc } from "@/lib/queryClient";
+import type { Sheet } from "../types";
+import { CellWithValueStack } from "./CellWithValueStack";
+import { CellWithVariableIdStack } from "./CellWithVariableIdStack";
+import { GoogleSheetConnectDialog } from "./GoogleSheetsConnectDialog";
+import { GoogleSpreadsheetPicker } from "./GoogleSpreadsheetPicker";
+import { RowsFilterTableList } from "./RowsFilterTableList";
+import { SheetsDropdown } from "./SheetsDropdown";
+
+type Props = {
+  options: GoogleSheetsBlock["options"];
+  onOptionsChange: (options: GoogleSheetsBlock["options"]) => void;
+  blockId: string;
+};
+
+export const GoogleSheetsSettings = ({
+  options,
+  onOptionsChange,
+  blockId,
+}: Props) => {
+  const { workspace } = useWorkspace();
+  const { typebot } = useTypebot();
+  const { save } = useTypebot();
+  const { data, status } = useQuery(
+    orpc.sheets.getSheets.queryOptions({
+      input: {
+        credentialsId: options?.credentialsId ?? "",
+        spreadsheetId: options?.spreadsheetId ?? "",
+        workspaceId: workspace?.id ?? "",
+      },
+      enabled:
+        !!options?.credentialsId && !!options?.spreadsheetId && !!workspace?.id,
+    }),
+  );
+  const { isOpen, onOpen, onClose } = useOpenControls();
+  const sheet = useMemo(
+    () => data?.sheets?.find((s) => s.id === options?.sheetId),
+    [data?.sheets, options?.sheetId],
+  );
+  const emptyOptions = {
+    action: undefined,
+    credentialsId: undefined,
+    sheetId: undefined,
+    spreadsheetId: undefined,
+  } satisfies GoogleSheetsBlock["options"];
+  const baseOptions = options ?? emptyOptions;
+  const handleCredentialsIdChange = (credentialsId: string | undefined) =>
+    onOptionsChange({
+      ...baseOptions,
+      credentialsId,
+    });
+  const handleSpreadsheetIdChange = (spreadsheetId: string | undefined) =>
+    onOptionsChange({ ...baseOptions, spreadsheetId });
+  const handleSheetIdChange = (sheetId: string | undefined) =>
+    onOptionsChange({ ...baseOptions, sheetId });
+
+  const handleActionChange = (action: GoogleSheetsAction | undefined) =>
+    onOptionsChange({
+      credentialsId: options?.credentialsId,
+      spreadsheetId: options?.spreadsheetId,
+      sheetId: options?.sheetId,
+      action,
+    });
+
+  const handleCreateNewClick = async () => {
+    await save();
+    onOpen();
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      {workspace && (
+        <CredentialsDropdown
+          type="google sheets"
+          scope={{ type: "workspace", workspaceId: workspace.id }}
+          currentCredentialsId={options?.credentialsId}
+          onCredentialsSelect={handleCredentialsIdChange}
+          onCreateNewClick={handleCreateNewClick}
+          credentialsName="Sheets account"
+        />
+      )}
+      {typebot && (
+        <GoogleSheetConnectDialog
+          typebotId={typebot.id}
+          blockId={blockId}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
+      )}
+      {options?.credentialsId && workspace && (
+        <GoogleSpreadsheetPicker
+          spreadsheetId={options.spreadsheetId}
+          workspaceId={workspace.id}
+          credentialsId={options.credentialsId}
+          onSpreadsheetIdSelect={handleSpreadsheetIdChange}
+        />
+      )}
+      {options?.spreadsheetId && options.credentialsId && (
+        <SheetsDropdown
+          sheets={data?.sheets ?? []}
+          isLoading={status === "pending"}
+          sheetId={options.sheetId}
+          onSelectSheetId={handleSheetIdChange}
+        />
+      )}
+      {options?.spreadsheetId &&
+        options.credentialsId &&
+        isDefined(options.sheetId) && (
+          <BasicSelect
+            className="w-full"
+            value={"action" in options ? options.action : undefined}
+            onChange={handleActionChange}
+            items={Object.values(GoogleSheetsAction)}
+            placeholder="Select an operation"
+          />
+        )}
+      {options?.action && (
+        <ActionOptions
+          options={options}
+          sheet={sheet}
+          onOptionsChange={onOptionsChange}
+        />
+      )}
+    </div>
+  );
+};
+
+const ActionOptions = ({
+  options,
+  sheet,
+  onOptionsChange,
+}: {
+  options:
+    | GoogleSheetsGetOptionsV6
+    | GoogleSheetsInsertRowOptions
+    | GoogleSheetsUpdateRowOptionsV6;
+  sheet?: Sheet;
+  onOptionsChange: (options: GoogleSheetsBlock["options"]) => void;
+}) => {
+  const handleInsertColumnsChange = (cellsToInsert: Cell[]) =>
+    onOptionsChange({
+      ...options,
+      cellsToInsert,
+    } as GoogleSheetsBlock["options"]);
+
+  const handleUpsertColumnsChange = (cellsToUpsert: Cell[]) =>
+    onOptionsChange({
+      ...options,
+      cellsToUpsert,
+    } as GoogleSheetsBlock["options"]);
+
+  const handleExtractingCellsChange = (cellsToExtract: ExtractingCell[]) =>
+    onOptionsChange({
+      ...options,
+      cellsToExtract,
+    } as GoogleSheetsBlock["options"]);
+
+  const handleFilterChange = (filter: GoogleSheetsGetOptions["filter"]) =>
+    onOptionsChange({ ...options, filter } as GoogleSheetsBlock["options"]);
+
+  const updateTotalRowsToExtract = (
+    totalRowsToExtract: GoogleSheetsGetOptions["totalRowsToExtract"],
+  ) =>
+    onOptionsChange({
+      ...options,
+      totalRowsToExtract,
+    } as GoogleSheetsBlock["options"]);
+
+  switch (options.action) {
+    case GoogleSheetsAction.INSERT_ROW:
+      return (
+        <TableList<Cell>
+          initialItems={options.cellsToInsert}
+          onItemsChange={handleInsertColumnsChange}
+          addLabel="Add a value"
+        >
+          {({ item, onItemChange }) => (
+            <CellWithValueStack
+              item={item}
+              onItemChange={onItemChange}
+              columns={sheet?.columns ?? []}
+            />
+          )}
+        </TableList>
+      );
+    case GoogleSheetsAction.UPDATE_ROW:
+      return (
+        <Accordion.Root>
+          <Accordion.Item>
+            <Accordion.Trigger>
+              <p className="w-full text-left">Row(s) to update</p>
+            </Accordion.Trigger>
+
+            <Accordion.Panel>
+              <RowsFilterTableList
+                columns={sheet?.columns ?? []}
+                filter={options.filter}
+                onFilterChange={handleFilterChange}
+              />
+            </Accordion.Panel>
+          </Accordion.Item>
+          <Accordion.Item>
+            <Accordion.Trigger>
+              <p className="w-full text-left">Cells to update</p>
+            </Accordion.Trigger>
+
+            <Accordion.Panel>
+              <TableList<Cell>
+                initialItems={options.cellsToUpsert}
+                onItemsChange={handleUpsertColumnsChange}
+                addLabel="Add a value"
+              >
+                {({ item, onItemChange }) => (
+                  <CellWithValueStack
+                    item={item}
+                    onItemChange={onItemChange}
+                    columns={sheet?.columns ?? []}
+                  />
+                )}
+              </TableList>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion.Root>
+      );
+    case GoogleSheetsAction.GET:
+      return (
+        <Accordion.Root>
+          <Accordion.Item>
+            <Accordion.Trigger>
+              <p className="w-full text-left">Select row(s)</p>
+            </Accordion.Trigger>
+
+            <Accordion.Panel>
+              <BasicSelect
+                className="w-full"
+                items={totalRowsToExtractOptions}
+                value={
+                  options.totalRowsToExtract ??
+                  defaultGoogleSheetsOptions.totalRowsToExtract
+                }
+                onChange={updateTotalRowsToExtract}
+              />
+              <RowsFilterTableList
+                columns={sheet?.columns ?? []}
+                filter={options.filter}
+                onFilterChange={handleFilterChange}
+              />
+            </Accordion.Panel>
+          </Accordion.Item>
+          <Accordion.Item>
+            <Accordion.Trigger>Columns to extract</Accordion.Trigger>
+            <Accordion.Panel>
+              <TableList<ExtractingCell>
+                initialItems={options.cellsToExtract}
+                onItemsChange={handleExtractingCellsChange}
+                addLabel="Add a value"
+                hasDefaultItem
+              >
+                {({ item, onItemChange }) => (
+                  <CellWithVariableIdStack
+                    item={item}
+                    onItemChange={onItemChange}
+                    columns={sheet?.columns ?? []}
+                  />
+                )}
+              </TableList>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion.Root>
+      );
+    default:
+      return null;
+  }
+};
