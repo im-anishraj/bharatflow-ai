@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ContentPageWrapper } from "@/components/ContentPageWrapper";
 import { WhyTypebotCta } from "@/components/cta/WhyTypebotCta";
+import { TextLink } from "@/components/link";
+import {
+  founderEmailUrl,
+  founderGithubUrl,
+  founderLinkedInUrl,
+} from "@/constants";
 import { MessageSquareGradientIcon } from "@/features/about/MessageSquareGradientIcon";
 import { ZapGradientIcon } from "@/features/about/ZapGradientIcon";
 import { createMetaTags } from "@/lib/createMetaTags";
@@ -39,7 +45,7 @@ function RouteComponent() {
             measure.
           </p>
           <p>
-            We are building a private prototype for{" "}
+            We are building an open-development prototype for{" "}
             <span className="group font-medium bg-clip-text text-transparent bg-linear-to-r from-[#c13eaa] to-[#ff491f] to-50%">
               <ZapGradientIcon className="size-6 inline-flex group-hover:motion-preset-oscillate-lg" />{" "}
               governed AI workflows
@@ -54,8 +60,24 @@ function RouteComponent() {
             live.
           </p>
           <p className="font-bold">
-            The current build is internal only until the legal and commercial
-            path is cleared.
+            The source is public for contribution, while commercial hosted use
+            still waits for a cleared legal path.
+          </p>
+          <p>
+            Built by Anish Raj:{" "}
+            <TextLink href={founderGithubUrl} target="_blank" hideExternalIcon>
+              GitHub
+            </TextLink>
+            {", "}
+            <TextLink
+              href={founderLinkedInUrl}
+              target="_blank"
+              hideExternalIcon
+            >
+              LinkedIn
+            </TextLink>
+            {", "}
+            <TextLink href={founderEmailUrl}>email</TextLink>.
           </p>
           <p>Build workflows. Keep control.</p>
         </div>

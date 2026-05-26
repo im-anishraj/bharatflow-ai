@@ -30,6 +30,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         const staticEntries = [
           { loc: `${currentBaseUrl}/`, lastmod: "2026-05-27" },
           { loc: `${currentBaseUrl}/pricing`, lastmod: "2026-05-27" },
+          { loc: `${currentBaseUrl}/docs`, lastmod: "2026-05-27" },
           { loc: `${currentBaseUrl}/about`, lastmod: "2026-05-27" },
           { loc: `${currentBaseUrl}/privacy-policy`, lastmod: "2026-05-27" },
           { loc: `${currentBaseUrl}/terms-of-service`, lastmod: "2026-05-27" },

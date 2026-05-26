@@ -4,7 +4,7 @@ import { templates } from "@typebot.io/templates";
 import { Badge } from "@typebot.io/ui/components/Badge";
 import { ContentPageWrapper } from "@/components/ContentPageWrapper";
 import { ButtonLink, CtaButtonLink } from "@/components/link";
-import { dashboardUrl } from "@/constants";
+import { templateRequestUrl } from "@/constants";
 import { TemplateCard } from "@/features/templates/TemplateCard";
 import { createMetaTags } from "@/lib/createMetaTags";
 
@@ -124,8 +124,9 @@ function RouteComponent() {
 
           <div className="pt-2">
             <CtaButtonLink
-              href={`${dashboardUrl}?template=${slug}`}
-              target="_blank"
+              href={`${templateRequestUrl}&body=${encodeURIComponent(
+                `Template: ${slug}`,
+              )}`}
             >
               Use this template
             </CtaButtonLink>

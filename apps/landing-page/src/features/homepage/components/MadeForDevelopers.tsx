@@ -34,7 +34,7 @@ export const MadeForDevelopers = () => {
         <div className="flex gap-3 items-center">
           <GithubIcon className="size-4" />
           <TextLink target="_blank" href={githubRepoUrl} hideExternalIcon>
-            Private repository
+            GitHub repository
           </TextLink>
         </div>
       </div>

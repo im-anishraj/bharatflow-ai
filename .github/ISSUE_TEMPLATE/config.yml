@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/im-anishraj/bharatflow-ai/discussions
+    about: Use Discussions for setup questions, product ideas, and architecture exploration.
+  - name: Security vulnerability
+    url: https://github.com/im-anishraj/bharatflow-ai/security/advisories/new
+    about: Please report vulnerabilities privately.

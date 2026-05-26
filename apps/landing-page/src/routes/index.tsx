@@ -35,7 +35,7 @@ function Home() {
         <Hero />
       </Section>
       <div className="-mt-24 md:-mt-[120vh]">
-        <Section className="relative isolate px-0 rounded-t-3xl motion-opacity-in-0 animate-in fade-in slide-in-from-bottom-[40px] fill-mode-both duration-600 delay-4000 md:animate-none md:pt-32 bg-transparent">
+        <Section className="relative isolate px-0 rounded-t-3xl motion-opacity-in-0 animate-in fade-in slide-in-from-bottom-[40px] fill-mode-both duration-600 delay-1000 md:animate-none md:pt-32 bg-transparent">
           <div className="motion-safe:md-scroll-magic-container-fade-in absolute inset-0 size-full rounded-t-3xl -z-10 bg-[url('$magicBackgrounds/magic-background.png')] bg-no-repeat bg-size-[100%] md:motion-safe:opacity-0" />
           <div className="md:h-[200vh] motion-safe:md-scroll-use-cases-fade-in md:motion-safe:opacity-0">
             <UseCases className="md:sticky top-0" />

@@ -12,7 +12,7 @@ export const TypebotLogo = (props: SVGProps<SVGSVGElement>) => (
 );
 
 export const TypebotLogoFull = (props: SVGProps<SVGSVGElement>) => (
-  <svg width="150px" height="32" {...props} viewBox="0 0 150 32" fill="none">
+  <svg width="170px" height="32" {...props} viewBox="0 0 170 32" fill="none">
     <title>BharatFlow AI Logo</title>
     <rect width="32" height="32" rx="8" fill="currentColor" />
     <path

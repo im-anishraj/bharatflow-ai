@@ -1,6 +1,6 @@
 import { chatsLimits } from "@typebot.io/billing/constants";
 import { CtaButtonLink } from "@/components/link";
-import { registerUrl } from "@/constants";
+import { launchPilotUrl } from "@/constants";
 import {
   PerkListItem,
   PlanNamePill,
@@ -14,12 +14,12 @@ export const FreePlanCard = ({ children }: { children?: React.ReactNode }) => (
       Launch
     </PlanNamePill>
     <div className="flex flex-col gap-10 items-center">
-      <h2>Private demo</h2>
+      <h2>Community demo</h2>
       {children}
     </div>
 
     <PricingCardFooter>
-      <CtaButtonLink href={registerUrl} variant="secondary" size="lg">
+      <CtaButtonLink href={launchPilotUrl} variant="secondary" size="lg">
         Build a workflow
       </CtaButtonLink>
     </PricingCardFooter>
@@ -40,6 +40,6 @@ export const FreePlanPerksList = () => (
     <PerkListItem>Native integrations</PerkListItem>
     <PerkListItem>Webhooks</PerkListItem>
     <PerkListItem>Custom Javascript & CSS</PerkListItem>
-    <PerkListItem>Private docs and founder support</PerkListItem>
+    <PerkListItem>Public docs and founder support</PerkListItem>
   </ul>
 );

@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/bharatflow
-      ENCRYPTION_SECRET: ci-only-placeholder-secret-32-chars
+      ENCRYPTION_SECRET: 0123456789abcdef0123456789abcdef
       NEXTAUTH_URL: http://localhost:3000
       NEXT_PUBLIC_VIEWER_URL: http://localhost:3001
       NODE_OPTIONS: --no-node-snapshot
@@ -61,5 +61,11 @@ jobs:
             git diff --exit-code
           fi
 
+      - name: Format and lint
+        run: bunx nx format-and-lint
+
       - name: Typecheck
         run: bunx nx typecheck
+
+      - name: Build landing page
+        run: bunx nx build landing-page

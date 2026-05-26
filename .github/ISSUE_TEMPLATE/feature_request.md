@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Propose a scoped improvement for the private BharatFlow AI prototype
+about: Propose a scoped improvement for BharatFlow AI
 title: "[Feature]: "
 labels: enhancement
 assignees: ""
@@ -20,4 +20,3 @@ assignees: ""
 - 
 
 ## Risks Or Dependencies
-

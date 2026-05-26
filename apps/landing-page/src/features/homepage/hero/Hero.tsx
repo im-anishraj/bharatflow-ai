@@ -19,26 +19,26 @@ export const Hero = () => (
     </div>
     <div className="flex flex-col items-center px-2 gap-10 pb-44 md:sticky md:top-[calc(100vh/2-var(--hero-text-height)/2)] shrink-0 pt-32 md:pt-0">
       <h1 className="text-center uppercase font-bold text-balance">
-        <span className="animate-in fade-in slide-in-from-bottom-10 blur-in-sm inline-block fill-mode-both duration-800 delay-700">
+        <span className="animate-in fade-in slide-in-from-bottom-10 blur-in-sm inline-block fill-mode-both duration-800 delay-100">
           AI workflows for
         </span>
         <br />
-        <span className="animate-in fade-in slide-in-from-bottom-10 blur-in-sm inline-block fill-mode-both delay-1900 duration-300">
+        <span className="animate-in fade-in slide-in-from-bottom-10 blur-in-sm inline-block fill-mode-both delay-300 duration-300">
           India&apos;s WhatsApp-first
         </span>
         <br />
-        <span className="animate-in fade-in slide-in-from-bottom-10 blur-in-sm inline-block fill-mode-both delay-2500 duration-300">
+        <span className="animate-in fade-in slide-in-from-bottom-10 blur-in-sm inline-block fill-mode-both delay-500 duration-300">
           businesses
         </span>
       </h1>
-      <p className="text-center text-foreground/60 font-normal text-balance md:text-xl max-w-3xl animate-in fade-in slide-in-from-bottom-10 blur-in-sm fill-mode-both delay-3000 duration-600">
+      <p className="text-center text-foreground/60 font-normal text-balance md:text-xl max-w-3xl animate-in fade-in slide-in-from-bottom-10 blur-in-sm fill-mode-both delay-700 duration-600">
         BharatFlow AI helps sales, support, and operations teams design governed
         customer journeys, launch them on WhatsApp and web, and sync every
         qualified conversation into the systems they already use.
       </p>
 
       <CtaButtonLink
-        className="animate-in fade-in slide-in-from-bottom-10 blur-in-sm fill-mode-both delay-3300 duration-600 md:hidden"
+        className="animate-in fade-in slide-in-from-bottom-10 blur-in-sm fill-mode-both delay-1000 duration-600 md:hidden"
         size="lg"
         href={registerUrl}
       >

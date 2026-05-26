@@ -1,0 +1,51 @@
+---
+title: BharatFlow AI Docs
+description: Public operating notes for the BharatFlow AI open-development prototype.
+updatedAt: 2026-05-27
+author: BharatFlow AI
+---
+
+These notes are the public documentation surface for the open-development prototype. They keep contributors, evaluators, and pilot reviewers on working links while the full docs deployment is not yet live.
+
+## Prototype Scope
+
+BharatFlow AI is a public open-development prototype derived from Typebot. It should be used for contribution, controlled demos, workflow design, and architecture validation only until the legal and commercial path is cleared.
+
+Use demo data instead of real customer records. Avoid uploading regulated documents, financial files, health data, or production WhatsApp conversations unless the security and legal posture has been approved.
+
+## Workflow Builder
+
+The prototype keeps the existing visual builder foundation:
+
+- visual flow editing;
+- variables and conditions;
+- AI provider blocks;
+- webhooks and HTTP calls;
+- file upload;
+- Google Sheets and email integrations;
+- WhatsApp, web, embed, popup, and API deployment patterns; and
+- results, logs, and analytics surfaces.
+
+## Integrations
+
+The MVP should package existing blocks as enterprise playbooks before adding new primitives. Prioritize WhatsApp intake, lead qualification, support routing, KYC/document intake, payment links, CRM handoff, and spreadsheet export.
+
+India-native connectors should be added as Forge blocks where possible so the runtime stays stable.
+
+## Deployment
+
+Until BharatFlow-owned infrastructure is configured, prototype CTAs request maintainer-approved access instead of sending users to placeholder app or docs domains.
+
+For local validation, use the monorepo apps:
+
+- builder: `http://localhost:3000`
+- viewer: `http://localhost:3001`
+- landing page: `http://localhost:3002`
+
+## Support
+
+For prototype access, demo feedback, or security concerns, contact [Anish Raj](mailto:anishraj.dev@gmail.com).
+
+## Compliance
+
+The current implementation includes DPDP-aware usage guidance, consent-oriented templates, and privacy copy. It is not yet a complete compliance product. Review the [privacy notice](/privacy-policy) and [business continuity note](/business-continuity) before external pilots.
