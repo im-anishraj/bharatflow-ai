@@ -18,8 +18,8 @@
     "check-broken-links": "mdx-local-link-checker content public '*/(index.mdx|blog|about|pricing?isTiersModalOpened=true)'"
   },
   "dependencies": {
-    "@tanstack/react-router": "1.167.4",
-    "@tanstack/react-start": "1.166.16",
+    "@tanstack/react-router": "1.170.8",
+    "@tanstack/react-start": "1.168.14",
     "@typebot.io/billing": "workspace:*",
     "@typebot.io/lib": "workspace:*",
     "@typebot.io/prisma": "workspace:*",
@@ -34,14 +34,14 @@
     "zod": "^4.3.5"
   },
   "devDependencies": {
-    "@content-collections/core": "0.14.2",
+    "@content-collections/core": "0.15.1",
     "@content-collections/integrations": "0.5.0",
     "@content-collections/mdx": "0.2.2",
-    "@content-collections/vite": "0.2.9",
+    "@content-collections/vite": "0.3.0",
     "@shikijs/transformers": "2.4.2",
-    "@tailwindcss/typography": "0.5.16",
+    "@tailwindcss/typography": "0.5.19",
     "@tailwindcss/vite": "^4.1.16",
-    "@tanstack/react-router-devtools": "1.166.9",
+    "@tanstack/react-router-devtools": "1.167.0",
     "@types/node": "^24.10.13",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
