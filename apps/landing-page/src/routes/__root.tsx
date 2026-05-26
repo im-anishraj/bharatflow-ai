@@ -3,6 +3,7 @@ import {
   HeadContent,
   Outlet,
   Scripts,
+  useLocation,
   useNavigate,
 } from "@tanstack/react-router";
 import { z } from "zod";
@@ -49,6 +50,7 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   const { isHeaderOpened } = Route.useSearch();
+  const { pathname } = useLocation();
   const navigate = useNavigate({ from: Route.fullPath });
   const { cookieConsentStatus, setCookieConsentStatus } =
     useCookieConsentStatus();
@@ -79,7 +81,13 @@ function RootComponent() {
       </head>
       <body>
         <div className="isolate flex flex-col items-stretch">
-          <div className="fixed z-10 top-4 md:bottom-12 md:top-auto w-full">
+          <div
+            className={
+              pathname === "/"
+                ? "fixed z-10 top-4 md:bottom-12 md:top-auto w-full"
+                : "fixed z-10 top-4 w-full"
+            }
+          >
             <Header
               onOpen={openHeader}
               onClose={closeHeader}

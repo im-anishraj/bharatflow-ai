@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ContentPageWrapper } from "@/components/ContentPageWrapper";
 import { WhyTypebotCta } from "@/components/cta/WhyTypebotCta";
+import { TextLink } from "@/components/link";
+import {
+  founderEmailUrl,
+  founderGithubUrl,
+  founderLinkedInUrl,
+} from "@/constants";
 import { MessageSquareGradientIcon } from "@/features/about/MessageSquareGradientIcon";
 import { ZapGradientIcon } from "@/features/about/ZapGradientIcon";
 import { createMetaTags } from "@/lib/createMetaTags";
@@ -56,6 +62,22 @@ function RouteComponent() {
           <p className="font-bold">
             The current build is internal only until the legal and commercial
             path is cleared.
+          </p>
+          <p>
+            Built by Anish Raj:{" "}
+            <TextLink href={founderGithubUrl} target="_blank" hideExternalIcon>
+              GitHub
+            </TextLink>
+            {", "}
+            <TextLink
+              href={founderLinkedInUrl}
+              target="_blank"
+              hideExternalIcon
+            >
+              LinkedIn
+            </TextLink>
+            {", "}
+            <TextLink href={founderEmailUrl}>email</TextLink>.
           </p>
           <p>Build workflows. Keep control.</p>
         </div>

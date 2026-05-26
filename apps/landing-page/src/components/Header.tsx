@@ -190,7 +190,7 @@ const Mobile = React.forwardRef<HTMLElement, Props>(function Mobile(
                 variant: "outline",
               })}
             >
-              Sign in
+              Request access
             </CtaButtonLink>
           </motion.nav>
         )}

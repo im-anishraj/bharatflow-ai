@@ -1,9 +1,8 @@
 import { chatsLimits, seatsLimits } from "@typebot.io/billing/constants";
-import { Plan } from "@typebot.io/prisma/enum";
 import { Button } from "@typebot.io/ui/components/Button";
 import { MoreInfoTooltip } from "@typebot.io/ui/components/MoreInfoTooltip";
 import { CtaButtonLink } from "@/components/link";
-import { registerUrl } from "@/constants";
+import { businessPilotUrl } from "@/constants";
 import {
   PerkListItem,
   PlanNamePill,
@@ -25,11 +24,7 @@ export const ProPlanCard = ({ children }: { children?: React.ReactNode }) => (
       {children}
     </div>
     <PricingCardFooter>
-      <CtaButtonLink
-        variant="secondary"
-        size="lg"
-        href={`${registerUrl}?subscribePlan=${Plan.PRO}`}
-      >
+      <CtaButtonLink variant="secondary" size="lg" href={businessPilotUrl}>
         Start business pilot
       </CtaButtonLink>
     </PricingCardFooter>

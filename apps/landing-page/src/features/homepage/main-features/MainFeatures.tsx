@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { type SVGProps, useEffect, useRef, useState } from "react";
 import { Card } from "@/components/Card";
 import { TextLink } from "@/components/link";
-import { breakpoints } from "../../../constants";
+import { breakpoints, docsUrl } from "../../../constants";
 import { useWindowSize } from "../hooks/useWindowSize";
 import deployVideoSrc from "./assets/deploy.mp4";
 import dragDropVideoSrc from "./assets/drag-drop.mp4";
@@ -72,7 +72,7 @@ const features = [
     description:
       "BharatFlow AI gives teams a visual builder for lead qualification, document intake, support triage, payment collection, appointment booking, and human handoff. Use variables, conditions, file uploads, AI blocks, and reusable templates without changing the core runtime.",
     link: {
-      src: "https://docs.bharatflow.ai/editor/blocks/integrations/google-sheets",
+      src: `${docsUrl}#integrations`,
       text: "View all integrations",
     },
     video: {
@@ -88,7 +88,7 @@ const features = [
     description:
       "Build a workflow once and publish it as a WhatsApp journey, website embed, popup, chat bubble, custom domain, or HTTP/API-powered flow. Connect every interaction to CRM, support, analytics, spreadsheets, and internal tools.",
     link: {
-      src: "https://docs.bharatflow.ai/deploy/web/overview",
+      src: `${docsUrl}#deployment`,
       text: "Read docs",
     },
     video: {

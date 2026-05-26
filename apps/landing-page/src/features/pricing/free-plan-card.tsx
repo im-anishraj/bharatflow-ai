@@ -1,6 +1,6 @@
 import { chatsLimits } from "@typebot.io/billing/constants";
 import { CtaButtonLink } from "@/components/link";
-import { registerUrl } from "@/constants";
+import { launchPilotUrl } from "@/constants";
 import {
   PerkListItem,
   PlanNamePill,
@@ -19,7 +19,7 @@ export const FreePlanCard = ({ children }: { children?: React.ReactNode }) => (
     </div>
 
     <PricingCardFooter>
-      <CtaButtonLink href={registerUrl} variant="secondary" size="lg">
+      <CtaButtonLink href={launchPilotUrl} variant="secondary" size="lg">
         Build a workflow
       </CtaButtonLink>
     </PricingCardFooter>

@@ -3,8 +3,10 @@ import { TypebotLogoFull } from "@/components/TypebotLogo";
 import {
   discordUrl,
   docsUrl,
+  founderEmailUrl,
+  founderGithubUrl,
+  founderLinkedInUrl,
   githubRepoUrl,
-  linkedInUrl,
 } from "../../constants";
 import gradientSeparatorSrc from "./assets/gradient-separator.png";
 
@@ -37,9 +39,22 @@ const data = [
         label: "GitHub",
         href: githubRepoUrl,
       },
+    ],
+  },
+  {
+    title: "Founder",
+    links: [
+      {
+        label: "Anish Raj",
+        href: founderGithubUrl,
+      },
       {
         label: "LinkedIn",
-        href: linkedInUrl,
+        href: founderLinkedInUrl,
+      },
+      {
+        label: "Email",
+        href: founderEmailUrl,
       },
     ],
   },
