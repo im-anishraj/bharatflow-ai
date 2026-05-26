@@ -20,7 +20,7 @@
     "test": "bun test .test.ts --external isolated-vm"
   },
   "dependencies": {
-    "@platejs/basic-nodes": "49.0.0",
+    "@platejs/basic-nodes": "53.0.0",
     "@platejs/floating": "49.0.0",
     "@platejs/link": "49.1.1",
     "@platejs/list-classic": "49.1.0",
