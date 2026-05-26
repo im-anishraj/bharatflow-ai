@@ -22,7 +22,7 @@
   "dependencies": {
     "@platejs/basic-nodes": "49.0.0",
     "@platejs/floating": "49.0.0",
-    "@platejs/link": "49.1.1",
+    "@platejs/link": "53.0.3",
     "@platejs/list-classic": "49.1.0",
     "@platejs/markdown": "50.1.2",
     "@typebot.io/runtime-session-store": "workspace:*",
