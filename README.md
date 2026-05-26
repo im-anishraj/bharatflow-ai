@@ -1,14 +1,30 @@
 # BharatFlow AI
 
-BharatFlow AI is a private prototype for WhatsApp-first conversational workflow automation for Indian revenue, customer experience, and operations teams.
+[![CI](https://github.com/im-anishraj/bharatflow-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/im-anishraj/bharatflow-ai/actions/workflows/ci.yml)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-2ea44f.svg)](CONTRIBUTING.md)
+[![License: FSL-1.1-Apache-2.0](https://img.shields.io/badge/license-FSL--1.1--Apache--2.0-blue.svg)](LICENSE)
+
+BharatFlow AI is an open-development prototype for WhatsApp-first conversational workflow automation for Indian revenue, customer experience, and operations teams.
 
 The product helps teams design governed customer journeys visually, launch them on WhatsApp, web, custom domains, embeds, and APIs, and measure outcomes through results and analytics. The current prototype preserves the Typebot monorepo foundation so we can move quickly without rebuilding the editor, runtime, integrations, workspace model, billing surface, or deployment architecture from scratch.
 
 ## Status
 
-This repository is private and intended for internal evaluation only.
+This repository is public for transparent development, contribution, review, and learning.
 
-Commercial use, public launch, resale, or externally hosted customer access must wait for legal review. The source is derived from Typebot and remains subject to the Functional Source License in `LICENSE`.
+Commercial use, resale, or externally hosted customer access must still wait for legal review. The source is derived from Typebot and remains subject to the Functional Source License in `LICENSE`.
+
+## Why This Exists
+
+India's businesses increasingly run sales, support, onboarding, and field workflows through WhatsApp. BharatFlow AI focuses on turning those conversations into measurable, governed workflows instead of loose chat threads or generic AI assistants.
+
+The project is designed around:
+
+- WhatsApp-first business journeys for India.
+- Visual workflow building for non-developers.
+- Deterministic routing, consent, handoff, and analytics.
+- AI as a controlled workflow step, not a black-box replacement for process.
+- Self-hostable and enterprise-friendly architecture.
 
 ## Architecture
 
@@ -39,6 +55,18 @@ Default local apps:
 
 - Builder: `http://localhost:3000`
 - Viewer: `http://localhost:3001`
+
+## Contributing
+
+New contributors are welcome. The best first areas are:
+
+- BharatFlow landing-page copy, accessibility, and responsive QA.
+- India-focused templates and playbooks in the existing template system.
+- Documentation, setup guides, and DPDP-aware workflow examples.
+- Small bug fixes in builder, viewer, integrations, and tests.
+- Issue triage, reproduction steps, and browser screenshots.
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [SECURITY.md](SECURITY.md) before opening a pull request.
 
 ## Required Environment
 
@@ -74,6 +102,10 @@ The MVP repositions the existing foundation into BharatFlow AI:
 - Controlled AI inside deterministic workflows.
 - Enterprise-friendly private deployment, encrypted credentials, OIDC, audit-ready operational posture, and DPDP-aware workflow design.
 
+See [ROADMAP.md](ROADMAP.md) for the public contribution roadmap.
+
 ## License Notice
 
 This repository includes software derived from Typebot under the Functional Source License, Version 1.1, Apache 2.0 Future License. Keep `LICENSE` and `NOTICE.md` intact. Do not remove original copyright notices.
+
+Public source availability does not remove the FSL obligations or grant permission to run a commercial hosted BharatFlow AI service from this codebase before a compliant legal path is documented.

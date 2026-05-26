@@ -41,20 +41,22 @@ const data = [
     ),
   },
   {
-    title: "What support is available in the private prototype?",
+    title: "What support is available in the public prototype?",
     content: (
       <>
-        The private prototype is supported directly by the founding team:
+        The public prototype is supported directly by the maintainer and
+        community:
         <ol className="list-decimal list-inside flex flex-col gap-6 py-6">
           <li>
             <TextLink href={docsUrl} target="_blank">
-              Internal documentation
+              Public documentation
             </TextLink>
             : setup guides, workflow patterns, and operational notes.
           </li>
           <li>
-            <span className="font-bold">Private issue tracking</span>: bugs and
-            roadmap requests are managed through the private GitHub repository.
+            <span className="font-bold">GitHub issues and discussions</span>:
+            bugs, roadmap requests, and contribution ideas are managed in the
+            public repository.
           </li>
           <li>
             <span className="font-bold">Enterprise demos</span>: customer-facing

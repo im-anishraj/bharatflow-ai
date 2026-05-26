@@ -55,8 +55,8 @@ const data = [
     title: "Do you offer annual payments?",
     content: (
       <>
-        The private prototype is priced monthly because usage, WhatsApp volume,
-        AI credits, and implementation scope can change during pilots.
+        The prototype tiers are shown monthly because usage, WhatsApp volume, AI
+        credits, and implementation scope can change during controlled pilots.
       </>
     ),
   },

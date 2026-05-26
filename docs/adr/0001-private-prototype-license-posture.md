@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted.
+Superseded by [ADR 0002](0002-public-repository-open-development.md).
 
 ## Context
 
@@ -12,7 +12,7 @@ The intended product direction overlaps with conversational workflow automation.
 
 ## Decision
 
-This repository will remain a private internal prototype until legal review confirms one of the following paths:
+This repository was initially kept as a private internal prototype until legal review could confirm one of the following paths:
 
 - Commercial license or written permission.
 - Clean-room implementation of required capabilities.

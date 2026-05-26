@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a defect in the private BharatFlow AI prototype
+about: Report a reproducible defect in BharatFlow AI
 title: "[Bug]: "
 labels: bug
 assignees: ""
@@ -24,6 +24,6 @@ assignees: ""
 - App:
 - Browser:
 - Branch/commit:
+- Operating system:
 
 ## Screenshots Or Logs
-

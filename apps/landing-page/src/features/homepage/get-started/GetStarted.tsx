@@ -11,7 +11,7 @@ const instructions = [
     },
     title: "Step 1",
     description:
-      "Create a private workspace and choose the workflow pack that matches your team.",
+      "Create a secure workspace and choose the workflow pack that matches your team.",
   },
   {
     image: {

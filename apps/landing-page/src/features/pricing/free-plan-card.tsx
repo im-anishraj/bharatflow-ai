@@ -14,7 +14,7 @@ export const FreePlanCard = ({ children }: { children?: React.ReactNode }) => (
       Launch
     </PlanNamePill>
     <div className="flex flex-col gap-10 items-center">
-      <h2>Private demo</h2>
+      <h2>Community demo</h2>
       {children}
     </div>
 
@@ -40,6 +40,6 @@ export const FreePlanPerksList = () => (
     <PerkListItem>Native integrations</PerkListItem>
     <PerkListItem>Webhooks</PerkListItem>
     <PerkListItem>Custom Javascript & CSS</PerkListItem>
-    <PerkListItem>Private docs and founder support</PerkListItem>
+    <PerkListItem>Public docs and founder support</PerkListItem>
   </ul>
 );

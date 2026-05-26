@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_layout/oss-friends")({
     meta: createMetaTags({
       title: "Partner Ecosystem | BharatFlow AI",
       description:
-        "BharatFlow AI's partner ecosystem is being curated for the private prototype.",
+        "BharatFlow AI's partner ecosystem is being curated for implementation, compliance, and integration contributors.",
       imagePath: "/images/default-og.png",
       path: "/oss-friends",
     }),
@@ -21,9 +21,10 @@ function RouteComponent() {
       <div className="flex flex-col gap-4">
         <h1>Partner Ecosystem</h1>
         <p className="text-foreground/70">
-          BharatFlow AI is currently a private prototype. We are curating a
-          small ecosystem of implementation, compliance, and integration
-          partners before any public launch.
+          BharatFlow AI is public for open development. We are curating an
+          ecosystem of implementation, compliance, and integration contributors
+          while commercial hosted availability remains subject to legal
+          clearance.
         </p>
       </div>
     </ContentPageWrapper>

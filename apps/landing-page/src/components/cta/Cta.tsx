@@ -39,7 +39,7 @@ export const Cta = ({
           {buttonLabel}
         </CtaButtonLink>
         <p className="text-muted-foreground text-center">
-          Private prototype. Internal evaluation only.
+          Public prototype. Controlled pilots by maintainer approval.
         </p>
       </div>
     </div>

@@ -155,7 +155,7 @@ export const Footer = () => {
           </div>
         </div>
         <p className="text-foreground/70 text-sm">
-          Private internal prototype - BharatFlow AI
+          Open-development prototype - BharatFlow AI
         </p>
       </div>
     </footer>

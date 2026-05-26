@@ -61,5 +61,11 @@ jobs:
             git diff --exit-code
           fi
 
+      - name: Format and lint
+        run: bunx nx format-and-lint
+
       - name: Typecheck
         run: bunx nx typecheck
+
+      - name: Build landing page
+        run: bunx nx build landing-page
