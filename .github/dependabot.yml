@@ -17,7 +17,9 @@ updates:
     directory: /
     schedule:
       interval: monthly
-    open-pull-requests-limit: 3
+    # Keep npm version-update PRs paused until the Bun lockfile update path is
+    # stable in CI. Dependabot security updates remain enabled in repo settings.
+    open-pull-requests-limit: 0
     labels:
       - dependencies
       - javascript
