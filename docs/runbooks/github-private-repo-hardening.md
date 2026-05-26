@@ -34,6 +34,10 @@ Enable where GitHub plan support allows:
 - CodeQL/default code scanning;
 - private vulnerability reporting.
 
+If GitHub reports that secret scanning or code scanning is not available for
+the private repository plan, keep the workflow disabled and document the gap in
+the prototype risk register before external pilots.
+
 ## Secrets
 
 - Store secrets in GitHub Actions secrets or an approved external secret manager.
