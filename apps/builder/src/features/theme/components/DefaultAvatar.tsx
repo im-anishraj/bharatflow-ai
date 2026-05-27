@@ -1,9 +1,12 @@
 import { cn } from "@typebot.io/ui/lib/cn";
+import { useId } from "react";
 
 export const DefaultAvatar = ({
   className,
   ...props
 }: React.SVGProps<SVGSVGElement>) => {
+  const gradientId = `bharatflow-builder-avatar-${useId().replace(/:/g, "")}`;
+
   return (
     <svg
       viewBox="0 0 156 156"
@@ -13,15 +16,43 @@ export const DefaultAvatar = ({
       data-testid="default-avatar"
       {...props}
     >
-      <title>Default Avatar</title>
+      <title>BharatFlow AI Avatar</title>
+      <defs>
+        <linearGradient
+          id={gradientId}
+          x1="24"
+          x2="132"
+          y1="18"
+          y2="138"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#FFB86C" />
+          <stop offset="0.5" stopColor="#FF4D2E" />
+          <stop offset="1" stopColor="#0F9F6E" />
+        </linearGradient>
+      </defs>
       <rect width="156" height="156" rx="78" fill="#1D1D1D" />
-      <path
-        d="M104.936 49.1111C103.446 45.3515 99.7782 42.6938 95.4875 42.6938H58.0109C52.3972 42.6938 47.8457 47.2454 47.8457 52.859V102.555C47.8457 105.405 49.0182 107.98 50.9075 109.825C52.3996 113.584 56.0699 116.242 60.3606 116.242H97.8373C103.451 116.242 108 111.693 108 106.079V56.3837C108 53.5334 106.828 50.9557 104.936 49.1111ZM99.7759 102.555C99.7759 104.918 97.8514 106.843 95.4875 106.843H58.0109C57.3177 106.843 56.6621 106.678 56.0817 106.382C54.6812 105.677 53.7202 104.225 53.7202 102.555V52.859C53.7202 50.4928 55.6446 48.5683 58.0109 48.5683H95.4875C97.748 48.5683 99.6067 50.3283 99.7641 52.5535C99.7712 52.6546 99.7759 52.7556 99.7759 52.859V102.555Z"
-        fill="white"
+      <rect
+        x="24"
+        y="24"
+        width="108"
+        height="108"
+        rx="28"
+        fill={`url(#${gradientId})`}
+      />
+      <rect
+        x="24.5"
+        y="24.5"
+        width="107"
+        height="107"
+        rx="27.5"
+        stroke="white"
+        strokeOpacity="0.16"
       />
       <path
-        d="M74.1477 54.4219L71.2273 54.9369C70.4362 55.0764 69.908 55.8308 70.0475 56.6219L77.6623 99.8073C77.8017 100.598 78.5561 101.127 79.3472 100.987L82.2676 100.472C83.0587 100.333 83.587 99.5783 83.4475 98.7872L75.8327 55.6018C75.6932 54.8107 74.9388 54.2824 74.1477 54.4219Z"
+        d="M11 11H22C25.4 11 27.5 12.9 27.5 15.8C27.5 17.6 26.6 19 25 19.8C27.1 20.5 28.4 22.1 28.4 24.3C28.4 27.4 26 29.5 22.3 29.5H11V11ZM15.2 14.5V18.4H21.3C22.6 18.4 23.3 17.7 23.3 16.5C23.3 15.3 22.5 14.5 21.1 14.5H15.2ZM15.2 21.5V26H21.8C23.3 26 24.2 25.1 24.2 23.8C24.2 22.4 23.2 21.5 21.7 21.5H15.2Z"
         fill="white"
+        transform="translate(24 24) scale(2.7)"
       />
     </svg>
   );
