@@ -11,10 +11,11 @@ import { Wallet01Icon } from "@typebot.io/ui/icons/Wallet01Icon";
 import { cn } from "@typebot.io/ui/lib/cn";
 
 type Props = {
+  className?: string;
   template: Template;
 };
 
-export const TemplateIcon = ({ template }: Props) => {
+export const TemplateIcon = ({ className, template }: Props) => {
   const Icon = getIcon(template.slug);
   const palette = getPalette(template.slug);
 
@@ -23,6 +24,7 @@ export const TemplateIcon = ({ template }: Props) => {
       className={cn(
         "relative h-28 overflow-hidden rounded-xl border p-4",
         palette.surface,
+        className,
       )}
     >
       <div className="absolute inset-0 opacity-50 [background-image:radial-gradient(circle_at_1px_1px,currentColor_1px,transparent_0)] [background-size:18px_18px]" />

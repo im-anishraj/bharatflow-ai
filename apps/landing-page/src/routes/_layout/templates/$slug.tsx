@@ -6,6 +6,7 @@ import { ContentPageWrapper } from "@/components/ContentPageWrapper";
 import { ButtonLink, CtaButtonLink } from "@/components/link";
 import { templateRequestUrl } from "@/constants";
 import { TemplateCard } from "@/features/templates/TemplateCard";
+import { TemplateIcon } from "@/features/templates/TemplateIcon";
 import { createMetaTags } from "@/lib/createMetaTags";
 
 export const Route = createFileRoute("/_layout/templates/$slug")({
@@ -54,37 +55,43 @@ function RouteComponent() {
         </ButtonLink>
 
         <div className="flex flex-col gap-6 bg-background p-6 rounded-xl border">
-          <div className="flex items-start gap-4">
-            <span className="text-5xl md:text-6xl">{template.emoji}</span>
-            <div className="flex flex-col gap-2">
-              <h1 className="text-3xl md:text-4xl font-bold text-balance leading-tight">
-                {templateTitle}
-              </h1>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <span>By</span>
-                <span className="font-medium text-foreground">
-                  BharatFlow AI
-                </span>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center">
+            <TemplateIcon
+              className="h-40 md:h-52 lg:order-last"
+              template={template}
+            />
+
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <h1 className="text-3xl md:text-4xl font-bold text-balance leading-tight">
+                  {templateTitle}
+                </h1>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span>By</span>
+                  <span className="font-medium text-foreground">
+                    BharatFlow AI
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex gap-2 flex-wrap">
+                <Badge colorScheme="purple">{template.useCase}</Badge>
+                {template.features.map((feature) => (
+                  <Badge key={feature} colorScheme="blue">
+                    {feature}
+                  </Badge>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <p className="text-lg text-muted-foreground text-pretty">
+                  {template.summary}
+                </p>
+                <p className="text-base text-muted-foreground text-pretty">
+                  {template.description}
+                </p>
               </div>
             </div>
-          </div>
-
-          <div className="flex gap-2 flex-wrap">
-            <Badge colorScheme="purple">{template.useCase}</Badge>
-            {template.features.map((feature) => (
-              <Badge key={feature} colorScheme="blue">
-                {feature}
-              </Badge>
-            ))}
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <p className="text-lg text-muted-foreground text-pretty">
-              {template.summary}
-            </p>
-            <p className="text-base text-muted-foreground text-pretty">
-              {template.description}
-            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
