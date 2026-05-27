@@ -42,7 +42,7 @@ export const Hero = () => (
         size="lg"
         href={registerUrl}
       >
-        Build a workflow
+        Request pilot access
       </CtaButtonLink>
     </div>
     <div

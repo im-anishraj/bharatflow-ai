@@ -7,11 +7,11 @@ const instructions = [
   {
     image: {
       src: signUpButtonSrc,
-      alt: "A button in the center with label 'Sign up'",
+      alt: "A button in the center with label 'Request access'",
     },
     title: "Step 1",
     description:
-      "Create a secure workspace and choose the workflow pack that matches your team.",
+      "Request approved access and choose the workflow pack that matches your team.",
   },
   {
     image: {

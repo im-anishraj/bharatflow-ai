@@ -128,7 +128,7 @@ function RouteComponent() {
                 `Template: ${slug}`,
               )}`}
             >
-              Use this template
+              Request this template
             </CtaButtonLink>
           </div>
         </div>

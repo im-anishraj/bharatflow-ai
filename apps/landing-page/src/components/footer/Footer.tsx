@@ -1,9 +1,9 @@
 import { TextLink } from "@/components/link";
 import { TypebotLogoFull } from "@/components/TypebotLogo";
 import {
+  contactUrl,
   discordUrl,
   docsUrl,
-  founderEmailUrl,
   founderGithubUrl,
   founderLinkedInUrl,
   githubRepoUrl,
@@ -54,7 +54,7 @@ const data = [
       },
       {
         label: "Email",
-        href: founderEmailUrl,
+        href: contactUrl,
       },
     ],
   },

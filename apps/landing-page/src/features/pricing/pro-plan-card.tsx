@@ -25,7 +25,7 @@ export const ProPlanCard = ({ children }: { children?: React.ReactNode }) => (
     </div>
     <PricingCardFooter>
       <CtaButtonLink variant="secondary" size="lg" href={businessPilotUrl}>
-        Start business pilot
+        Request Business pilot
       </CtaButtonLink>
     </PricingCardFooter>
   </PricingCardRoot>

@@ -225,7 +225,7 @@ export const Cta = () => (
     </p>
     <div className="w-full md:w-auto flex flex-col md:flex-row gap-4">
       <CtaButtonLink size="lg" href={registerUrl}>
-        Build a workflow
+        Request pilot access
       </CtaButtonLink>
     </div>
   </div>

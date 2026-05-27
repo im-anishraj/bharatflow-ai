@@ -13,7 +13,7 @@ export const WhyTypebotCta = () => (
         integrations are all reviewable before launch.
       </p>
       <CtaButtonLink size="lg" href={registerUrl}>
-        Build a workflow
+        Request pilot access
       </CtaButtonLink>
     </div>
     <img

@@ -12,7 +12,7 @@ export type CtaProps = {
 export const Cta = ({
   className,
   children = "Ready to turn WhatsApp conversations into governed business workflows?",
-  buttonLabel = "Build a workflow",
+  buttonLabel = "Request pilot access",
   isLogoDisplayed = true,
 }: CtaProps) => {
   return (
@@ -39,7 +39,7 @@ export const Cta = ({
           {buttonLabel}
         </CtaButtonLink>
         <p className="text-muted-foreground text-center">
-          Public prototype. Controlled pilots by maintainer approval.
+          Public prototype. Approved pilots only; no open signup yet.
         </p>
       </div>
     </div>

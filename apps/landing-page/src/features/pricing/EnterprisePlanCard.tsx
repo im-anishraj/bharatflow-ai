@@ -31,7 +31,7 @@ export const EnterprisePlanCard = () => (
     </div>
     <PricingCardFooter>
       <CtaButtonLink variant="secondary" size="lg" href={enterpriseLeadUrl}>
-        Book enterprise demo
+        Request enterprise demo
       </CtaButtonLink>
     </PricingCardFooter>
   </PricingCardRoot>

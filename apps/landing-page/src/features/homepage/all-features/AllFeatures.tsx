@@ -100,7 +100,7 @@ export const AllFeatures = () => {
             className="hidden md:inline-flex"
             href={registerUrl}
           >
-            Build a workflow
+            Request pilot access
           </CtaButtonLink>
         </div>
 
@@ -138,7 +138,7 @@ export const AllFeatures = () => {
       </div>
       <div className="md:hidden px-4">
         <CtaButtonLink size="lg" href={registerUrl}>
-          Build a workflow
+          Request pilot access
         </CtaButtonLink>
       </div>
     </div>
