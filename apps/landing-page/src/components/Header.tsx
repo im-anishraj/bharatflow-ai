@@ -14,7 +14,6 @@ import {
   docsUrl,
   githubRepoUrl,
   registerUrl,
-  signinUrl,
 } from "@/constants";
 import { useWindowSize } from "@/features/homepage/hooks/useWindowSize";
 import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
@@ -184,7 +183,7 @@ const Mobile = React.forwardRef<HTMLElement, Props>(function Mobile(
               ))}
             </div>
             <CtaButtonLink
-              href={signinUrl}
+              href={registerUrl}
               className={buttonVariants({
                 size: "lg",
                 variant: "outline",
@@ -295,7 +294,7 @@ const Desktop = React.forwardRef<
           </CtaButtonLink>
         ) : (
           <CtaButtonLink size="sm" href={registerUrl}>
-            Build a workflow
+            Request access
           </CtaButtonLink>
         )}
       </nav>

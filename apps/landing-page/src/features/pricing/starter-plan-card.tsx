@@ -28,7 +28,7 @@ export const StarterPlanCard = ({
     </div>
     <PricingCardFooter>
       <CtaButtonLink variant="secondary" size="lg" href={growthPilotUrl}>
-        Start growth pilot
+        Request Growth pilot
       </CtaButtonLink>
     </PricingCardFooter>
   </PricingCardRoot>

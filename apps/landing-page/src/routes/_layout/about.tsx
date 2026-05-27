@@ -2,11 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ContentPageWrapper } from "@/components/ContentPageWrapper";
 import { WhyTypebotCta } from "@/components/cta/WhyTypebotCta";
 import { TextLink } from "@/components/link";
-import {
-  founderEmailUrl,
-  founderGithubUrl,
-  founderLinkedInUrl,
-} from "@/constants";
+import { contactUrl, founderGithubUrl, founderLinkedInUrl } from "@/constants";
 import { MessageSquareGradientIcon } from "@/features/about/MessageSquareGradientIcon";
 import { ZapGradientIcon } from "@/features/about/ZapGradientIcon";
 import { createMetaTags } from "@/lib/createMetaTags";
@@ -77,7 +73,7 @@ function RouteComponent() {
               LinkedIn
             </TextLink>
             {", "}
-            <TextLink href={founderEmailUrl}>email</TextLink>.
+            <TextLink href={contactUrl}>email</TextLink>.
           </p>
           <p>Build workflows. Keep control.</p>
         </div>

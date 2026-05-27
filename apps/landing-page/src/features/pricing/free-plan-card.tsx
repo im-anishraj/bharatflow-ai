@@ -20,7 +20,7 @@ export const FreePlanCard = ({ children }: { children?: React.ReactNode }) => (
 
     <PricingCardFooter>
       <CtaButtonLink href={launchPilotUrl} variant="secondary" size="lg">
-        Build a workflow
+        Request Launch access
       </CtaButtonLink>
     </PricingCardFooter>
   </PricingCardRoot>
