@@ -38,7 +38,7 @@ export const SEO = ({
         ) : null}
         <link
           rel="icon"
-          type={favIconUrl ? "image/png" : "images/svg+xml"}
+          type={favIconUrl ? "image/png" : "image/svg+xml"}
           href={
             favIconUrl ??
             defaultSettings.metadata.favIconUrl(env.NEXT_PUBLIC_VIEWER_URL[0])

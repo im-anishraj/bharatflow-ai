@@ -1,7 +1,7 @@
 import { cn } from "@typebot.io/ui/lib/cn";
+import { TypebotLogo } from "@/components/TypebotLogo";
 import { registerUrl } from "@/constants";
 import { CtaButtonLink } from "../link";
-import magicWand from "./assets/magic-wand.png";
 
 export type CtaProps = {
   className?: string;
@@ -24,7 +24,7 @@ export const Cta = ({
       )}
     >
       {isLogoDisplayed && (
-        <img src={magicWand} alt="magic wand" className="size-24" />
+        <TypebotLogo className="size-24 drop-shadow-[0_24px_60px_rgba(255,77,46,0.28)]" />
       )}
       {children && (
         <h2 className="text-center px-5 text-balance max-w-5xl">{children}</h2>

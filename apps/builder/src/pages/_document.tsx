@@ -7,7 +7,7 @@ const Document = () => (
         crossOrigin="anonymous"
         src="//unpkg.com/react-scan/dist/auto.global.js"
       /> */}
-      <link rel="icon" type="images/svg+xml" href="/favicon.svg" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <meta name="google" content="notranslate" />
       <script src="/__ENV.js" />
     </Head>
