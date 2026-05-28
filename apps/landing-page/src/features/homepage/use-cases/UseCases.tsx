@@ -16,20 +16,10 @@ import supportAndProductBuilderSrc from "./assets/support-builder.png";
 const useCases = [
   {
     label: "Revenue",
-    description: "Qualify WhatsApp leads, score intent, and route clean deals.",
-    eyebrow: "Lead-to-revenue command flow",
-    outcome:
-      "Every high-intent WhatsApp lead lands in sales with owner, score, and context.",
-    metrics: [
-      { value: "38%", label: "more qualified demos" },
-      { value: "7 min", label: "median first response" },
-      { value: "92%", label: "consent captured" },
-    ],
-    tags: ["Lead scoring", "CRM sync", "Callback booking"],
     images: {
       builder: {
         src: marketingBuilderSrc,
-        alt: "An example of a revenue lead qualification workflow being built in BharatFlow AI",
+        alt: "An example of a revenue workflow being built in BharatFlow AI",
       },
       bot: {
         src: marketingBotSrc,
@@ -39,16 +29,6 @@ const useCases = [
   },
   {
     label: "Customer Experience",
-    description: "Triage issues, collect proof, and keep SLA handoffs visible.",
-    eyebrow: "Support intake and SLA routing",
-    outcome:
-      "Customers get structured help while teams receive complete tickets, not loose chats.",
-    metrics: [
-      { value: "24/7", label: "guided support" },
-      { value: "4h", label: "priority SLA path" },
-      { value: "1 tap", label: "proof upload" },
-    ],
-    tags: ["Issue triage", "File proof", "Agent handoff"],
     images: {
       builder: {
         src: supportAndProductBuilderSrc,
@@ -62,24 +42,14 @@ const useCases = [
   },
   {
     label: "Operations",
-    description: "Collect KYC, documents, and approvals without inbox chaos.",
-    eyebrow: "Vendor and KYC onboarding",
-    outcome:
-      "Operations teams collect documents, verify fields, and move approvals from one governed flow.",
-    metrics: [
-      { value: "64%", label: "faster document cycle" },
-      { value: "0", label: "missing purpose fields" },
-      { value: "84", label: "vendors this month" },
-    ],
-    tags: ["KYC intake", "Approval queue", "Audit notes"],
     images: {
       builder: {
         src: salesBuilderSrc,
-        alt: "An example of a vendor onboarding workflow being built in BharatFlow AI",
+        alt: "An example of an operations workflow being built in BharatFlow AI",
       },
       bot: {
         src: salesBotSrc,
-        alt: "A WhatsApp screenshot of an automated vendor onboarding workflow",
+        alt: "A WhatsApp screenshot of an automated operations workflow",
       },
     },
   },
@@ -139,8 +109,6 @@ export const UseCases = ({ className }: { className?: string }) => {
     return;
   };
 
-  const activeUseCase = useCases[currentUseCase.index];
-
   return (
     <div
       className={cn("flex flex-col gap-16 md:gap-20 px-4 md:pt-10", className)}
@@ -150,29 +118,19 @@ export const UseCases = ({ className }: { className?: string }) => {
         <TypebotLogoFull width="120px" />
         <Cta />
       </div>
-      <div className="flex flex-col items-center gap-6 md:gap-10">
-        <div className="flex flex-col items-center gap-3">
-          <div className="flex max-w-full items-end gap-4 overflow-x-auto px-2 md:gap-12">
-            {useCases.map((useCase, index) => (
-              <UsecaseTitle
-                isSelected={currentUseCase.index === index}
-                progressValue={getProgressValue(index)}
-                onClick={() => selectUseCase(index)}
-                key={useCase.label}
-              >
-                {useCase.label}
-              </UsecaseTitle>
-            ))}
-          </div>
-          <p className="min-h-6 max-w-xl text-center text-sm text-muted-foreground md:text-base">
-            {activeUseCase.description}
-          </p>
-          <InsightStrip
-            metrics={activeUseCase.metrics}
-            tags={activeUseCase.tags}
-          />
+      <div className="flex flex-col items-center gap-4 md:12">
+        <div className="flex items-end gap-4 md:gap-12">
+          {useCases.map((useCase, index) => (
+            <UsecaseTitle
+              progressValue={getProgressValue(index)}
+              onClick={() => selectUseCase(index)}
+              key={useCase.label}
+            >
+              {useCase.label}
+            </UsecaseTitle>
+          ))}
         </div>
-        <div className="relative isolate w-[94%] max-w-6xl md:w-[86%]">
+        <div className="relative isolate">
           <AnimatePresence initial={false} mode="popLayout">
             <motion.div
               key={currentUseCase.index}
@@ -196,13 +154,25 @@ export const UseCases = ({ className }: { className?: string }) => {
                   ease: "easeIn",
                 },
               }}
-              className="relative"
             >
-              <DemoStage
-                activeUseCase={activeUseCase}
-                builderImage={activeUseCase.images.builder}
-                botImage={activeUseCase.images.bot}
-              />
+              <figure className="border-2 border-border rounded-lg md:rounded-2xl overflow-hidden outline-4 md:outline-8 outline-gray-900 -outline-offset-[5px] md:-outline-offset-10 outline-solid md:mr-24">
+                <img
+                  src={useCases[currentUseCase.index].images.builder.src}
+                  alt={useCases[currentUseCase.index].images.builder.alt}
+                  className="w-auto md:max-h-[85vh]"
+                  width="3456px"
+                  height="2158px"
+                />
+              </figure>
+              <figure className="border-[0.5px] md:border-2 border-border rounded-xl md:rounded-4xl overflow-hidden outline-2 md:outline-8 outline-gray-900 -outline-offset-[2.5px] md:-outline-offset-10 outline-solid absolute right-0 -bottom-4 md:-bottom-10">
+                <img
+                  src={useCases[currentUseCase.index].images.bot.src}
+                  alt={useCases[currentUseCase.index].images.bot.alt}
+                  className="w-auto max-h-none max-w-20 md:max-w-64 2xl:max-w-none 2xl:max-h-[65vh] p-[2px] md:p-2"
+                  width="1179px"
+                  height="2556px"
+                />
+              </figure>
             </motion.div>
           </AnimatePresence>
           <PreloadUseCaseImages />
@@ -212,115 +182,24 @@ export const UseCases = ({ className }: { className?: string }) => {
   );
 };
 
-const InsightStrip = ({
-  metrics,
-  tags,
-}: {
-  metrics: readonly { value: string; label: string }[];
-  tags: readonly string[];
-}) => (
-  <div className="flex max-w-4xl flex-col items-center gap-3">
-    <div className="grid grid-cols-3 gap-2">
-      {metrics.map((metric) => (
-        <div
-          className="rounded-lg border border-white/50 bg-white/55 px-3 py-2 text-center shadow-sm backdrop-blur"
-          key={`${metric.value}-${metric.label}`}
-        >
-          <p className="text-sm font-semibold leading-none text-gray-12 md:text-base">
-            {metric.value}
-          </p>
-          <p className="mt-1 text-[11px] leading-tight text-gray-10 md:text-xs">
-            {metric.label}
-          </p>
-        </div>
-      ))}
-    </div>
-    <div className="hidden flex-wrap justify-center gap-2 md:flex">
-      {tags.map((tag) => (
-        <span
-          className="rounded-full border border-orange-6/50 bg-orange-2/70 px-3 py-1 text-xs font-medium text-orange-11 shadow-sm"
-          key={tag}
-        >
-          {tag}
-        </span>
-      ))}
-    </div>
-  </div>
-);
-
-const DemoStage = ({
-  activeUseCase,
-  builderImage,
-  botImage,
-}: {
-  activeUseCase: (typeof useCases)[number];
-  builderImage: { src: string; alt: string };
-  botImage: { src: string; alt: string };
-}) => (
-  <div className="relative rounded-2xl border border-white/50 bg-white/35 p-2 shadow-[0_18px_54px_rgba(15,23,42,0.16)] backdrop-blur md:rounded-3xl md:p-3">
-    <div className="mb-2 flex items-center justify-between gap-4 px-1 md:mb-4 md:px-2">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-orange-10 md:text-sm">
-          {activeUseCase.eyebrow}
-        </p>
-        <p className="hidden max-w-2xl text-sm text-gray-11 md:block">
-          {activeUseCase.outcome}
-        </p>
-      </div>
-      <div className="hidden items-center gap-2 rounded-full border border-gray-5 bg-white/75 px-3 py-2 text-xs font-medium text-gray-11 shadow-sm md:flex">
-        <span className="size-2 rounded-full bg-green-9" />
-        WhatsApp + web + API
-      </div>
-    </div>
-    <figure className="overflow-hidden rounded-xl border-2 border-gray-12 bg-white shadow-xl outline-4 outline-gray-12 -outline-offset-[5px] outline-solid md:rounded-2xl md:outline-6 md:-outline-offset-8 md:mr-20">
-      <img
-        src={builderImage.src}
-        alt={builderImage.alt}
-        className="w-full"
-        width="2400px"
-        height="1500px"
-      />
-    </figure>
-    <figure className="absolute -right-2 -bottom-6 w-[28%] max-w-28 overflow-hidden rounded-2xl border border-gray-4 bg-white shadow-[0_18px_44px_rgba(15,23,42,0.28)] outline-4 outline-gray-12 -outline-offset-[5px] outline-solid md:right-2 md:-bottom-8 md:w-[18%] md:max-w-60 md:rounded-3xl md:border-2 md:outline-6 md:-outline-offset-8">
-      <img
-        src={botImage.src}
-        alt={botImage.alt}
-        className="w-full p-1 md:p-2"
-        width="900px"
-        height="1800px"
-      />
-    </figure>
-    <div className="absolute -left-2 bottom-3 hidden max-w-60 rounded-xl border border-white/70 bg-white/90 p-3 shadow-xl backdrop-blur md:block">
-      <p className="text-xs font-semibold text-gray-12">Live pilot signal</p>
-      <p className="mt-1 text-xs leading-relaxed text-gray-10">
-        Sales, support, and ops teams see structured outcomes instead of loose
-        chat history.
-      </p>
-    </div>
-  </div>
-);
-
 const UsecaseTitle = ({
   children,
-  isSelected,
   progressValue,
   onClick,
 }: {
   children: React.ReactNode;
-  isSelected: boolean;
   progressValue?: number;
   onClick?: () => void;
 }) => (
   <button
     type="button"
-    aria-pressed={isSelected}
-    className="flex shrink-0 cursor-pointer flex-col items-center gap-2 rounded-md px-1 py-1 outline-hidden focus-visible:ring-2 focus-visible:ring-orange-8 hover:[&_h3]:opacity-100"
+    className="flex flex-col items-center gap-2 shrink-0 cursor-pointer hover:[&_h3]:opacity-100"
     onClick={onClick}
   >
     <h3
       className={cx(
-        "text-center text-lg font-medium transition-opacity duration-200 ease-out",
-        isSelected ? "opacity-100" : "opacity-55",
+        "text-lg font-medium transition-opacity duration-200 ease-out text-center",
+        progressValue ? "opacity-100" : "opacity-50",
       )}
     >
       {children}
